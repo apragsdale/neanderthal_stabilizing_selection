@@ -116,11 +116,45 @@ def set_up_demographic_model(Ne=10000):
     return g
 
 
+## set up recorders
+@dataclass
+class SimData:
+    generation: int
+    demes_ids: List[int]
+    mean_phenotype: List[float]
+    mean_fitness: List[float]
+    var_phenotype: List[float]
+
+
+@dataclass
+class Recorder:
+    data: list
+    sample_times: list
+
+    def __call__(self, pop, sampler):
+        md = np.array(pop.diploid_metadata)
+        # store lists of mean phenotypes, fitnesses, etc
+        deme_ids = sorted(list(set(md["deme"])))
+        mean_pheno = [md[md["deme"] == i]["g"].mean() for i in deme_ids]
+        mean_fitness = [md[md["deme"] == i]["w"].mean() for i in deme_ids]
+        var_pheno = [md[md["deme"] == i]["g"].var() for i in deme_ids]
+        self.data.append(
+            SimData(pop.generation, deme_ids, mean_pheno, mean_fitness, var_pheno)
+        )
+        if pop.generation % 1000 == 0:
+            print(
+                f"{time.ctime()}, at generation {pop.generation}"
+            )
+        if pop.generation in self.sample_times:
+            sampler.assign(range(pop.N))
+
+
 def run_sim(L, a, g, mu, optimum=0.0, VS=1, burnin=10):
     # constant effect sizes, +/- a
     sregions = [fwdpy11.ConstantS(0, L, 1, a), fwdpy11.ConstantS(0, L, 1, -a)]
     model = fwdpy11.discrete_demography.from_demes(g, burnin=burnin)
     simlen = model.metadata["total_simulation_length"]
+    Print("Total generations to run:", simlen)
 
     ## Set up pop
     initial_sizes = [
@@ -151,39 +185,8 @@ def run_sim(L, a, g, mu, optimum=0.0, VS=1, burnin=10):
 
     sample_times = [model.metadata["burnin_time"] + 2 * Ne]
 
-    ## set up recorders
-    @dataclass
-    class SimData:
-        generation: int
-        demes_ids: List[int]
-        mean_phenotype: List[float]
-        mean_fitness: List[float]
-        var_phenotype: List[float]
-
-    @dataclass
-    class Recorder:
-        data: list
-
-        def __call__(self, pop, sampler):
-            md = np.array(pop.diploid_metadata)
-            # store lists of mean phenotypes, fitnesses, etc
-            deme_ids = sorted(list(set(md["deme"])))
-            mean_pheno = [md[md["deme"] == i]["g"].mean() for i in deme_ids]
-            mean_fitness = [md[md["deme"] == i]["w"].mean() for i in deme_ids]
-            var_pheno = [md[md["deme"] == i]["g"].var() for i in deme_ids]
-            self.data.append(
-                SimData(pop.generation, deme_ids, mean_pheno, mean_fitness, var_pheno)
-            )
-            if pop.generation % 1000 == 0:
-                print(
-                    f"  at generation {pop.generation} of {simlen}, "
-                    f"{(time.time() - time1) / 60:0.2f} minutes"
-                )
-            if pop.generation in sample_times:
-                sampler.assign(range(pop.N))
-
     ## Initialize and evolve population
-    recorder = Recorder(data=[])
+    recorder = Recorder(data=[], sample_times=sample_times)
     pop = fwdpy11.DiploidPopulation(initial_sizes, L)
     rng = fwdpy11.GSLrng(seed)
 
@@ -259,7 +262,7 @@ if __name__ == "__main__":
     expectedVG = 4 * mu * VS
     print("Expected VG:", expectedVG)
 
-    g = set_up_demographic_model()
+    g = set_up_demographic_model(Ne=1000)
     pop, recorder = run_sim(L, a, g, mu, optimum=optimum, VS=VS)
 
     ## Dump to tskit
@@ -289,5 +292,10 @@ if __name__ == "__main__":
     ## save data
     # ancestry proportions data
     fname = f"data/introgressed_ancestry.a_{a}.mu_{mu}.seed_{seed}.pkl"
-    with open(fname, "wb+") as fin:
-        pickle.dump(all_props, fin)
+    with open(fname, "wb+") as fout:
+        pickle.dump(all_props, fout)
+
+    # save recorder information
+    fname = f"data/recorder.a_{a}.mu_{mu}.seed_{seed}.pkl"
+    with open(fname, "wb+") as fout:
+        pickle.dump(recorder, fout)
