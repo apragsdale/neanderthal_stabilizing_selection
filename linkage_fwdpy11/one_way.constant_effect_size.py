@@ -141,7 +141,7 @@ class Recorder:
         self.data.append(
             SimData(pop.generation, deme_ids, mean_pheno, mean_fitness, var_pheno)
         )
-        if pop.generation % 1000 == 0:
+        if pop.generation % 5000 == 0:
             print(
                 f"{time.ctime()}, at generation {pop.generation}"
             )
