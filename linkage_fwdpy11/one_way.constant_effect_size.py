@@ -25,10 +25,9 @@ from dataclasses import dataclass
 from typing import List
 from collections import defaultdict
 import pickle
-
+import gzip
 import time
 import demes
-
 import sys
 
 
@@ -142,9 +141,7 @@ class Recorder:
             SimData(pop.generation, deme_ids, mean_pheno, mean_fitness, var_pheno)
         )
         if pop.generation % 5000 == 0:
-            print(
-                f"{time.ctime()}, at generation {pop.generation}"
-            )
+            print(f"{time.ctime()}, at generation {pop.generation}")
         if pop.generation in self.sample_times:
             sampler.assign(range(pop.N))
 
@@ -245,10 +242,37 @@ def get_all_props(ts):
     return all_props
 
 
+def recorder_to_dict(recorder, g):
+    gens0 = len(recorder.data)
+    mp0 = np.zeros(gens0, dtype="float16")
+    mf0 = np.zeros(gens0, dtype="float16")
+    vp0 = np.zeros(gens0, dtype="float16")
+    gens1 = g.demes[1].start_time - g.demes[1].epochs[0].end_time
+    mp1 = np.zeros(gens1, dtype="float16")
+    mf1 = np.zeros(gens1, dtype="float16")
+    vp1 = np.zeros(gens1, dtype="float16")
+    j = 0
+    for i, d in enumerate(recorder.data):
+        mp0[i] = d.mean_phenotype[0]
+        mf0[i] = d.mean_fitness[0]
+        vp0[i] = d.var_phenotype[0]
+        if 1 in d.demes_ids:
+            mp1[j] = d.mean_phenotype[1]
+            mf1[j] = d.mean_fitness[1]
+            vp1[j] = d.var_phenotype[1]
+            j += 1
+    data = {
+        "model": g,
+        "A": {"mean_phenotype": mp0, "mean_fitness": mf0, "var_phenotype": vp0},
+        "B": {"mean_phenotype": mp1, "mean_fitness": mf1, "var_phenotype": vp1},
+    }
+    return data
+
+
 # what else to save?
 if __name__ == "__main__":
     # parameters for this simulation
-    seed = int(sys.argv[1]) + 1 + 200
+    seed = int(sys.argv[1]) + 1
     mu = float(sys.argv[2])
     a = float(sys.argv[3])
     print(f"Running mu={mu}, a={a}, with seed={seed}")
@@ -299,6 +323,7 @@ if __name__ == "__main__":
     # save recorder information
     # the recorder object itself is too large to store many copies of (15Mb),
     # so can we summarize the data more succinctly and efficiently
-    #fname = f"recorder.a_{a}.mu_{mu}.seed_{seed}.pkl"
-    #with open(fname, "wb+") as fout:
-    #    pickle.dump(recorder, fout)
+    compressed_data = recorder_to_dict(recorder, g)
+    fname = f"recorder.a_{a}.mu_{mu}.seed_{seed}.pkl.gz"
+    with gzip.open(fname, "wb+") as fout:
+        pickle.dump(compressed_data, fout)
