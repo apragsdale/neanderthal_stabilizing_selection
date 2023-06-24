@@ -154,7 +154,7 @@ def run_sim(L, a, g, mu, optimum=0.0, VS=1, burnin=10):
     sregions = [fwdpy11.ConstantS(0, L, 1, a), fwdpy11.ConstantS(0, L, 1, -a)]
     model = fwdpy11.discrete_demography.from_demes(g, burnin=burnin)
     simlen = model.metadata["total_simulation_length"]
-    Print("Total generations to run:", simlen)
+    print("Total generations to run:", simlen)
 
     ## Set up pop
     initial_sizes = [
@@ -248,9 +248,10 @@ def get_all_props(ts):
 # what else to save?
 if __name__ == "__main__":
     # parameters for this simulation
-    seed = int(sys.argv[1])
+    seed = int(sys.argv[1]) + 1 + 200
     mu = float(sys.argv[2])
     a = float(sys.argv[3])
+    print(f"Running mu={mu}, a={a}, with seed={seed}")
 
     ## Set up parameters
     L = 1e8
@@ -262,7 +263,7 @@ if __name__ == "__main__":
     expectedVG = 4 * mu * VS
     print("Expected VG:", expectedVG)
 
-    g = set_up_demographic_model(Ne=1000)
+    g = set_up_demographic_model()
     pop, recorder = run_sim(L, a, g, mu, optimum=optimum, VS=VS)
 
     ## Dump to tskit
@@ -291,11 +292,13 @@ if __name__ == "__main__":
 
     ## save data
     # ancestry proportions data
-    fname = f"data/introgressed_ancestry.a_{a}.mu_{mu}.seed_{seed}.pkl"
+    fname = f"introgressed_ancestry.a_{a}.mu_{mu}.seed_{seed}.pkl"
     with open(fname, "wb+") as fout:
         pickle.dump(all_props, fout)
 
     # save recorder information
-    fname = f"data/recorder.a_{a}.mu_{mu}.seed_{seed}.pkl"
-    with open(fname, "wb+") as fout:
-        pickle.dump(recorder, fout)
+    # the recorder object itself is too large to store many copies of (15Mb),
+    # so can we summarize the data more succinctly and efficiently
+    #fname = f"recorder.a_{a}.mu_{mu}.seed_{seed}.pkl"
+    #with open(fname, "wb+") as fout:
+    #    pickle.dump(recorder, fout)
