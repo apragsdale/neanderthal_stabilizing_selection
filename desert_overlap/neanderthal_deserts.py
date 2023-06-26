@@ -81,14 +81,14 @@ def get_ancestry_counts(ts):
 def set_up_demographic_model(Ne=10000):
     ## Set up demographic model
     gen = 25
-    T_split = 600000 // gen
-    T_H_to_N = 250000 // gen
-    T_N_to_H = 50000 // gen
-    b = demes.Builder(time_units="generations", generation_time=25)
+    T_split = 600000
+    T_H_to_N = 250000
+    T_N_to_H = 50000
+    b = demes.Builder(time_units="years", generation_time=25)
     b.add_deme(
         "Human",
         epochs=[
-            dict(start_size=Ne, end_time=60000 // gen),
+            dict(start_size=Ne, end_time=60000),
             dict(start_size=0.1 * Ne, end_size=2 * Ne),
         ],
     )
@@ -96,10 +96,10 @@ def set_up_demographic_model(Ne=10000):
         "Neand",
         start_time=T_split,
         ancestors=["Human"],
-        epochs=[dict(start_size=0.2 * Ne, end_time=45000 // gen)],
+        epochs=[dict(start_size=0.2 * Ne, end_time=45000)],
     )
-    b.add_pulse(sources=["Human"], dest="Neand", proportions=[0.05], time=250000 // gen)
-    b.add_pulse(sources=["Neand"], dest="Human", proportions=[0.02], time=50000 // gen)
+    b.add_pulse(sources=["Human"], dest="Neand", proportions=[0.05], time=T_H_to_N)
+    b.add_pulse(sources=["Neand"], dest="Human", proportions=[0.02], time=T_N_to_H)
     g = b.resolve()
     return g
 
