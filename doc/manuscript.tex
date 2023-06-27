@@ -248,6 +248,56 @@ remains constant.
 
 \section*{Results}
 
+\subsection*{Additive genetic variance after admixture}
+
+We expect genetic variance to increase after introgression. The amount that
+genetic variance increases depends on the allelic differences accumulated
+between populations and the effects of those alleles. Assuming no linkage,
+dominance or epistasis, \(V_G=\sum_l 2p_l(1-p_l)a_l^2\). After admixture, with
+proportion $f$ contributed by the source population (labeled 0) into the focal
+population (labeled 1), \(p_l = fp_{l,0} + (1-f)p_{l,1}\). Plugging into the
+expression for $V_G$, and after some simple algebra (Appendix~AX), we can
+express the expected genetic variance directly after admixture as \[V_G =
+fV_{G,0} + (1-f) V_{G,1} + 2f(1-f)\sum_l F_{2,l} a_l^2,\] where $F_2 = (p_0 -
+p_1)^2$ is the squared difference in allele frequencies at a locus
+\citep[e.g.,][]{peter2016admixture}. This result in known \citep[e.g.,][]{},
+showing that additive variance is equal to that in the source populations
+weighted by their contributions, plus a term that depends on the divergence at
+trait-affecting loci between the populations weighted by the quadratic factor
+$2f(1-f)$.
+
+In general, $F_2$ at a given locus will depend on the demographic history
+relating the two populations and the effect size at the locus due to selection
+on the trait. In the infinitesimal limit, involving many loci each of
+vanishingly small effect, dynamics at a given locus will be approximately
+neutral, so that $F_2$ depends only on the demography. In this case
+\begin{align*}
+    V_G & \approx f V_{G,0} + (1-f) V_{G,1} + 2f(1-f)\mathbb{E}[F_2] \sum_l a_l^2 \\
+    & = f V_{G,0} + (1-f) V_{G,1} + 2f(1-f)\mathbb{E}[F_2] n_m V_M,
+\end{align*}
+where $V_M$ is the variance of effect sizes of new mutations (assuming the mean
+is zero). 
+
+For $a \not\approx 0$, assuming neutral evolution will tend to overestimate
+$F_2$ compared to underdominant selection. We can compute expected $V_G$ both
+before and after admixture using the diffusion approximation for the joint SFS
+with underdominance. Comparing to simulations with free recombination between
+loci (Appendix~AY), we find that this provides an excellent fit to average
+observed $V_G$ over time (Figure~\ref{fig:toy-admixture}C,D). Following an
+initial rapid increase in $V_G$ due to admixture, it decays back to the
+steady-state expectation relatively rapidly.
+
+\begin{itemize}
+    \item Benefit of SFS -- partition by frequency classes (prev. seg vs introgressed)
+    \item VG from all both previously segregating and introgressed alleles decays,
+        replaced by VG due to new mutations
+    \item Dividing VG from introgressed alleles into introduced derived vs reintroduced
+        ancestral alleles shows the effect of differences in population sizes
+\end{itemize}
+
+\subsection*{Recurrent introgression and non-constant population size}
+
+
 \begin{figure}[ht!]
     \centering
     \includegraphics{../figures/neanderthal_admixture.pdf}
@@ -294,7 +344,7 @@ remains constant.
 
 \subsection{Additive genetic variance after admixture}
 
-Suppose two pouplation (labeled 0 and 1) diverged some time in the past and
+Suppose two population (labeled 0 and 1) diverged some time in the past and
 then admix in proportions $f$ and $1-f$.
 
 Assuming no linkage, dominance or epistasis (so \(V_G=V_A\)),
@@ -325,23 +375,6 @@ Then
     & = f V_{G,0} + (1-f)V_{G,1} + 2f(1-f)\sum_i F_{2,l}(0,1)a_l^2.
 \end{align*}
 
-This shows that additive genetic variance after admixture is equal to the
-additive variances in the source populations, weighted by their contributes,
-plus a term that depends on the divergence at loci contributing to the trait
-between the two populations, measured as $F_2$, weighted by the quadratic
-factor $2f(1-f)$.
-
-In general, $F_2$ at a given locus will depend on the demography connecting the
-two populations, as well as the effect size at the locus due to selection on
-the trait. In the infinitesimal limit, involving many loci each of vanishingly
-small effect, dynamics at a given locus will be approximately neutral, so that
-$F_2$ will depend only on the demography. In this case
-\begin{align*}
-    V_G & \approx f V_{G,0} + (1-f) V_{G,1} + 2f(1-f)\mathbb{E}[F_2] \sum_l a_l^2 \\
-    & = f V_{G,0} + (1-f) V_{G,1} + 2f(1-f)\mathbb{E}[F_2] n \sigma_m^2
-\end{align*}
-Here, $\sigma_m^2$ is the variance of effect sizes of new mutations (assuming mean is
-zero).
 
 \begin{figure}[ht!]
     \centering
