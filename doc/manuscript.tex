@@ -297,8 +297,7 @@ steady-state expectation relatively rapidly.
 
 \subsection*{Recurrent introgression and non-constant population size}
 
-
-\begin{figure}[ht!]
+\begin{figure}[t!]
     \centering
     \includegraphics{../figures/neanderthal_admixture.pdf}
     \caption{
@@ -307,7 +306,19 @@ steady-state expectation relatively rapidly.
     \label{fig:neand-to-human}
 \end{figure}
 
-\begin{figure}[ht!]
+\begin{itemize}
+    \item In the demographic model more closely resembling inferred history
+        connecting humans and Neanderthals (Figure~\ref{fig:neand-to-human}A),
+        we see that demographic history and the distribution of effect sizes
+        of new mutations impact $V_G$
+    \item Additive genetic variance increases after introgression in both directions,
+        which is expected to result in a period of decreased mean fitness
+    \item Population contractions decrease $V_G$, as the increased rate of drift
+        reduces diversity at loci underlying the trait
+    \item TODO: compare to linked simulations
+\end{itemize}
+
+\begin{figure}[t!]
     \centering
     \includegraphics{../figures/human_admixture.pdf}
     \caption{
@@ -316,16 +327,166 @@ steady-state expectation relatively rapidly.
     \label{fig:human-to-neand}
 \end{figure}
 
-\begin{figure}[ht!]
+\begin{itemize}
+    \item Because we know if a mutation was previously segregating in the population
+        receiving migrants, we can partition variation by contributions from
+        segregating vs introgressed variants (whether introduced derived mutations
+        or reintroduced ancestral mutations)
+    \item At low introgression proportions, as here, the majority of $V_G$ is still
+        contributed by previously segregating mutations, which is then expected to
+        be steadily replaced by new mutations (Figure 2). $V_G$ due to introgressed
+        variation decays monotonically over time (Figure~\ref{fig:neand-to-human}C,D)
+    \item While the total $V_G$ due to introgressed variants decays, we can also
+        consider the average contribution of introgressed vs non-introgressed SNPs
+        to $V_G$ ($h^2$ per SNP) -- at least for this demographic model and
+        DES, the contribution per SNP of introgressed variants is initially lower
+        than those of previously segregating variants. These contributions change
+        over time, in a way that depends on both the genomic architecture underlying
+        the trait and demography
+    \item This dependence on both architecture and demography is apparent when
+        comparing to $V_G$ contributed by introgressed and non-introgressed variants
+        in the early human-to-Neanderthal admixture (Figure~\ref{fig:human-to-neand})
+        -- here, again the contribution
+        from introgressed variants to $V_G$ decays monotonically, but depending on
+        the distribution of effect sizes, relative per-SNP $h^2$ changes over time
+        (though in these cases introgressed $h^2$ per SNP remains lower than
+        non-introgressed, when considering mutations at matched allele frequencies)
+\end{itemize}
+
+\subsection*{The effects of linkage}
+
+\begin{itemize}
+    \item So far, we have considered model and simulation without linkage -- in this
+        case, the underdominance model provides an excellent approximation
+    \item Including linkage between sites dramatically complicates things, making
+        theorical or analytical progress difficult
+    \item To explore the effects of linkage, we used individual-based simulations
+        with a single large chromosome of size 1 Morgan, and varried the total
+        mutation rate per haploid and the variance of effect sizes of new mutations
+    \item We'll highlight two effects of linkage
+        \begin{itemize}
+            \item Deviations from expected $V_G$, as well as more complicated
+                short-term dynamics after admixture
+            \item The reduction in introgressed ancestry in the regions surrounding
+                trait-affecting alleles
+        \end{itemize}
+\end{itemize}
+
+\subsubsection*{Effects of linkage on expected genetic variance}
+
+\begin{figure}[t!]
+    \centering
+    %\includegraphics{}
+    \caption{}
+    \label{fig:linkage-deviations}
+\end{figure}
+
+\begin{itemize}
+    \item Stabilizing selection reduces $V_G$ by selecting against minor alleles
+        (underdominance), but with linkage it can also reduce $V_G$ by selecting
+        for haplotypes that carry opposite effect alleles that cancel out -- this
+        creates LD between positive and negative effect alleles at linked loci,
+        known as the Bulmer effect \citep{}
+    \item Thus, $V_G$ in simulations with linkage deviate from predictions
+        assuming underdominance alone
+    \item The severity of this deviation depends on a number of factors: mean
+        recombination rate between trait-affecting loci, the total mutation rate,
+        the effect sizes (and distribution of effect sizes of new mutations)
+    \item In general, lower mutation rates imply lower total $V_G$, lower polygenicity,
+        and therefore higher recombination rates between trait-affecting alleles --
+        we therefore expect this deviation to be exacerbated with higher mutation
+        rates (all else being equal)
+\end{itemize}
+
+\subsubsection*{Reduction of introgressed ancestry surrounding an introgressed trait-affecting allele}
+
+\begin{itemize}
+    \item Because introgressed trait-affecting alleles are selected against as the
+        minor allele, linkage will also remove introgressed ancestry segments in the
+        regions surrounding the selected alleles
+    \item The expected reduction in introgressed ancestry proportions surrounding
+        functional alleles will depend on the effect size of the trait-affecting allele
+        and the probability of recombination surrounding that site
+    \item We can consider first a deterministic model of the dynamics of introgressed
+        allele frequencies at and around an introgressed functional allele -- this
+        model considers a single trait-affecting locus, ignoring any effects of
+        interference between selected alleles
+        \begin{itemize}
+            \item Consider a site with fixed differences between the two populations
+                (the derived allele is fixed in one, lost in the other)
+            \item At the functional site itself, with admixture proportion $f$ from the
+                minor parental ancestry, the initial frequency of the derived allele
+                is $p_0=f$ or $p_0 = 1-f$, if the derived allele was fixed in the 
+                major parental ancestry population
+            \item In one generation, the expected allele frequency at the selected locus
+                is \[p_{t+1} \approx p_t - s p_t(1-p_t)(1-2p_t),\] where $s=a^2/2V_S$
+            \item As discussed earlier, if $p_0<1/2$, $p_t\rightarrow0$, and if $p_0>1/2$,
+                $p_t\rightarrow1$ as $t\rightarrow\infty$
+            \item Consider a neutral locus separated from the selected locus by
+                recombination probability $r$. Initially, the expected frequency
+                of introgressed ancestry at that locus is $q_0=f$
+            \item The linked ancestry frequency will change due to selection acting on
+                the trait-affecting locus, depending on the strength of selection
+                at that locus and the level of linkage disequilibrium between
+                the two loci
+            \item $D=Cov(p,q)$ is the standard covariance measure of LD between loci,
+                and $q$ is expected to change as \[q_{t+1} \approx q_t - s D_t(1-2p_t)\]
+            \item $D$ also changes over time, due to both selection and recombination,
+                so that \[D_{t+1} \approx D_t - r D_t - s D_t (1-2p_t)^2\]
+            \item Initially, $D_0 = \pm f(1-f)$, with $D$ being positive if $p_0=f$
+                and negative if $p_0=1-f$
+            \item Together, this forms a nonlinear system of equations for the
+                deterministic change in allele frequencies at the two loci (one
+                selected, one neutral) and LD between them -- note that this is
+                deterministic in the infinite population size limit
+        \end{itemize}
+    \item Using this model, we can predict how allele frequencies and LD are expected
+        to change over time after admixture, for a given effect size $a$ and 
+        recombination rate $r$ (Figure~\ref{fig:linkage-pred}A,B)
+    \item As expected, lower effect sizes result in a slower reduction in introgressed
+        ancestry frequency, while higher recombination rates more quickly decouple
+        the linked ancestry from the selected allele
+    \item Thus, the expected reduction in introgressed ancestry is largest for
+        larger effect sizes (Figure~\ref{fig:linkage-pred}C), and LD between the
+        selected and linked neutral alleles is largest for neutral sites closest
+        to the selected allele (Figure~\ref{fig:linkage-pred}D)
+\end{itemize}
+
+
+\begin{figure}[t!]
     \centering
     \includegraphics{../figures/linkage_predictions.pdf}
     \caption{
         \textbf{}
+        \aprcomment{Linked allele frequency should always be minor, and labeled
+        introgressed ancestry frequency}
     }
     \label{fig:linkage-pred}
 \end{figure}
 
-\begin{figure}[ht!]
+\begin{itemize}
+    \item To explore the accuracy of this two-locus model, we compared to
+        simulations using the demographic model shown in
+        Figure~\ref{fig:toy-admixture}A with introgression fraction $f=0.05$.
+        We simulated a single 1 Morgan
+        chromosome, with all mutations having effect sizes $\pm a$ ($a=0.02$ or
+        $0.05$, with equal probability of being trait-increasing or decreasing)
+        and varying the total mutation rate ($\mu=0.001$, $0.0025$, and $0.01$)
+    \item For each mutation that was fixed in one population and absent in the
+        other (either fixed in the minor or major ancestry population), we
+        determined the average introgressed ancestry surrounding those introgressed
+        alleles (Figure~\ref{fig:linkage-sim})
+    \item The deterministic model provides a very good approximation for linked
+        introgressed ancestry when the mutation rate is small
+    \item As the mutation rate increases, polygenicity increases so that
+        trait-affecting alleles are more densely distributed along the chromosome --
+        deviations from the deterministic model are due to interference between
+        tightly linked trait-affecting alleles. For the highest mutation rate shown
+        here, there will be many trait-affecting alleles within the 1 cM window
+        around any focal SNP
+\end{itemize}
+
+\begin{figure}[t!]
     \centering
     \includegraphics{../figures/linkage_simulation.pdf}
     \caption{
@@ -335,7 +496,49 @@ steady-state expectation relatively rapidly.
 \end{figure}
 
 
-\clearpage
+\section*{Discussion}
+
+\begin{itemize}
+    \item Stabilizing selection with a constant optimum is an appropriate
+        null model for the dynamics of trait variation and selection on
+        alleles underlying those traits
+    \item Stabilizing selection results in population genetic predictions
+        for patterns of introgressed variation in and around functional
+        regions that differ from both load- and incompatibility-based arguments
+        \begin{itemize}
+            \item Load-based models predict that haplotypes from the less ``loaded''
+                population will be favored under introgression in either direction
+                -- thus, regions of depleted ancestry after introgression in one
+                direction will not be expected to also be introgressed ancestry
+                deserts after admixture in the opposite direction
+            \item \citet{mueller1942} originally pointed out that hybrid
+                incompatibilities should not form at single loci -- classical
+                incompatibilities require two or more loci, which are not
+                expected to be tightly linked to one another. Thus, under a
+                model of hybrid incompatibilities, the minor parent ancestry
+                is again selected against, but those loci will be in different
+                regions. Again, deserts are therefore not expected to overlap
+                if selection is largely due to incompatibilities
+            \item Instead, stabilizing selection causes introgressed DNA to be
+                depleted at the same loci under bi-directional gene flow
+                (could be thought of as single-locus incompatibility effects --
+                but these are not incompatibilities in the classical sense,
+                as the same effects occur even without admixture)
+            \item A prediction we could make is that, if current models are correct
+                that there has been introgression in both directions between
+                \emph{H. sapiens} and Neanderthals, introgressed ancestry deserts
+                should overlap with each other more often than expected by chance
+        \end{itemize}
+    \item Some conjectures about hybrid zones
+\end{itemize}
+
+\section*{Methods}
+
+\subsection*{Computing expected genetic variance using the diffusion approximation}
+
+\subsection*{Simulations with free recombination}
+
+\subsection*{Individual-based simulations with linkage}
 
 \bibliographystyle{genetics}
 \bibliography{manuscript}
@@ -376,7 +579,7 @@ Then
 \end{align*}
 
 
-\begin{figure}[ht!]
+\begin{figure}[tb!]
     \centering
     %\includegraphics{}
     \caption{
@@ -396,10 +599,5 @@ While incompatibilities require two or more loci (Morgan, 1942), introgression
 with stabilizing selection can create the appearance of a single-locus
 incompatibility via underdominance\dots
 
-\subsection{The role of linkage}
-
-\section{Discussion}
-
-\section{Methods}
 
 \end{document}
