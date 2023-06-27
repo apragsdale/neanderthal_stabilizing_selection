@@ -247,6 +247,9 @@ def get_average_ancestry(x, frac, spacing=2e6, win_size=1e5):
     assert (spacing / 2) % (win_size / 2) == 0
     assert x[-1] % spacing == 0
 
+    left = (spacing - win_size) / 2
+    right = (spacing + win_size) / 2
+
     func_regions = [
         [i * spacing + left, i * spacing + right] for i in range(int(L / 2e6))
     ]
