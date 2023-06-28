@@ -71,7 +71,7 @@ if __name__ == "__main__":
         y = fin["arr_0"]
         ax1.plot(rs, y, "-", lw=1, label=f"$\mu={mu}$")
 
-    ax1.legend()
+    ax1.legend(frameon=False)
     ax1.set_xlabel("cM")
     ax1.set_ylabel("Introgressed ancestry proportion")
     ax1.set_ylim(0, 0.055)
@@ -88,7 +88,7 @@ if __name__ == "__main__":
         y = fin["arr_0"]
         ax2.plot(rs, y, "-", lw=1, label=f"$\mu={mu}$")
 
-    ax2.legend()
+    #ax2.legend(frameon=False)
     ax2.set_xlabel("cM")
     ax2.set_ylabel("Introgressed ancestry proportion")
     ax2.set_ylim(0, 0.055)

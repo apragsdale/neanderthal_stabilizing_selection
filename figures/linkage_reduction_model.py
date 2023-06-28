@@ -35,33 +35,32 @@ def trajectories(p0, q0, D0, generations=1, r=0, s=0):
     return p, q, D
 
 
-def plot_split_trajectories(a, r, gens, p0, fig, ax, VS=1):
+def plot_split_trajectories(a, r, gens, f, fig, ax, VS=1, legend=True):
     s = a ** 2 / 2 / VS
     # divide subplot to show top and bottom
     divider = make_axes_locatable(ax)
     axb = divider.new_vertical(size="100%", pad=0.1)
     fig.add_axes(axb)
 
-    q0 = p0
+    q0 = f
     # initially fully linked
-    D0 = p0 - p0 * q0
-    p, q, D = trajectories(p0, q0, D0, generations=gens, r=r, s=a ** 2 / 2 / VS)
+    D0 = f * (1 - f)
+    p, q, D = trajectories(f, q0, D0, generations=gens, r=r, s=a ** 2 / 2 / VS)
 
     ax.plot(p, label="Selected allele frequency")
-    ax.plot(q, label="Linked allele frequency")
-    ax.plot(D, label="LD ($D=Cov(p,q)$)")
-    ax.set_ylim(0, p0 * 1.5)
+    ax.plot(q, label="Introgressed ancestry frequency")
+    ax.plot(D, label="$|D|$ ($D=Cov(p,q)$)")
+    ax.set_ylim(0, f * 1.5)
     ax.set_xlabel("Generations")
 
-    q0 = 1 - p0
     # initially fully linked
-    D0 = q0 - q0 ** 2
-    p, q, D = trajectories(1 - p0, q0, D0, generations=gens, r=r, s=a ** 2 / 2 / VS)
+    p, q, D = trajectories(1 - f, q0, -D0, generations=gens, r=r, s=a ** 2 / 2 / VS)
     axb.plot(p, label="Selected allele frequency")
-    axb.plot(q, label="Linked allele frequency")
-    axb.plot(D, label="LD ($D=Cov(p,q)$)")
-    axb.set_ylim(1 - p0 * 1.5, 1)
-    axb.legend()
+    axb.plot(q, label="Introgressed ancestry frequency")
+    axb.plot(D, label="$|D|$ ($D=Cov(p,q)$)")
+    axb.set_ylim(1 - f * 1.5, 1)
+    if legend:
+        axb.legend(frameon=False)
 
     ax.spines["top"].set_visible(False)
     axb.tick_params(bottom=False, labelbottom=False)
@@ -79,7 +78,7 @@ def plot_split_trajectories(a, r, gens, p0, fig, ax, VS=1):
     axb.set_title(f"$a={a}$, $r={r}$")
 
 
-def frequency_dip(a_vals, r_max, gens, p0, ax_q, ax_D, VS=1):
+def frequency_dip(a_vals, r_max, gens, p0, ax_q, ax_D, VS=1, legend=True):
     rs = np.linspace(0, r_max, 101)
     rs_plot = 100 * np.concatenate((-rs[:0:-1], rs))
     for a in a_vals:
@@ -94,8 +93,9 @@ def frequency_dip(a_vals, r_max, gens, p0, ax_q, ax_D, VS=1):
         Ds = np.concatenate((Ds[:0:-1], Ds))
         ax_q.plot(rs_plot, qs, label=f"$a={a}$")
         ax_D.plot(rs_plot, Ds, label=f"$a={a}$")
-    ax_q.legend()
-    ax_D.legend()
+    if legend:
+        ax_q.legend(frameon=False)
+        #ax_D.legend(frameon=False)
     ax_q.set_ylim(bottom=0)
     ax_D.set_ylim(bottom=0)
     ax_q.set_xlabel("Distance from selected locus (cM)")
@@ -106,10 +106,11 @@ def frequency_dip(a_vals, r_max, gens, p0, ax_q, ax_D, VS=1):
 
 
 if __name__ == "__main__":
-    p0 = 0.05
-    q0 = p0
+    f = 0.05
+    p0 = 1-f
+    q0 = f
     # initially fully linked
-    D0 = p0 - p0 * q0
+    D0 = f*(1-f)
 
     VS = 1
     gens = 2000
@@ -127,7 +128,7 @@ if __name__ == "__main__":
     a = 0.02
     r = 1e-2
     p0 = 0.05
-    plot_split_trajectories(a, r, gens, p0, fig, ax2, VS=VS)
+    plot_split_trajectories(a, r, gens, p0, fig, ax2, VS=VS, legend=False)
 
     ax3 = plt.subplot(2, 2, 2)
     ax4 = plt.subplot(2, 2, 4)
