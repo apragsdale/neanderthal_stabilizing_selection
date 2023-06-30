@@ -109,9 +109,7 @@ def set_up_demographic_model(Ne=10000):
 class SimData:
     generation: int
     demes_ids: List[int]
-    mean_phenotype: List[float]
     mean_fitness: List[float]
-    var_phenotype: List[float]
 
 
 @dataclass
@@ -125,11 +123,9 @@ class Recorder:
             md = np.array(pop.diploid_metadata)
             # store lists of mean phenotypes, fitnesses, etc
             deme_ids = sorted(list(set(md["deme"])))
-            mean_pheno = [md[md["deme"] == i]["g"].mean() for i in deme_ids]
             mean_fitness = [md[md["deme"] == i]["w"].mean() for i in deme_ids]
-            var_pheno = [md[md["deme"] == i]["g"].var() for i in deme_ids]
             self.data.append(
-                SimData(pop.generation, deme_ids, mean_pheno, mean_fitness, var_pheno)
+                SimData(pop.generation, deme_ids, mean_fitness)
             )
         if pop.generation % 1000 == 0:
             print(f"{time.ctime()}, at generation {pop.generation}")
@@ -170,7 +166,7 @@ def run_sim(
         "gvalue": fwdpy11.Multiplicative(scaling=2),
         "simlen": simlen,
         "demography": model,
-        "prune_selected": False,
+        "prune_selected": True,
     }
     params = fwdpy11.ModelParams(**pdict)
 
@@ -196,29 +192,21 @@ def run_sim(
 
 def recorder_to_dict(recorder, g):
     gens0 = len(recorder.data)
-    mp0 = np.zeros(gens0, dtype="float32")
     mf0 = np.zeros(gens0, dtype="float32")
-    vp0 = np.zeros(gens0, dtype="float32")
     gens1 = int(
         (g.demes[1].start_time - g.demes[1].epochs[0].end_time) / g.generation_time
     )
-    mp1 = np.zeros(gens1, dtype="float32")
     mf1 = np.zeros(gens1, dtype="float32")
-    vp1 = np.zeros(gens1, dtype="float32")
     j = 0
     for i, d in enumerate(recorder.data):
-        mp0[i] = d.mean_phenotype[0]
         mf0[i] = d.mean_fitness[0]
-        vp0[i] = d.var_phenotype[0]
         if 1 in d.demes_ids:
-            mp1[j] = d.mean_phenotype[1]
             mf1[j] = d.mean_fitness[1]
-            vp1[j] = d.var_phenotype[1]
             j += 1
     data = {
         "model": g,
-        "A": {"mean_phenotype": mp0, "mean_fitness": mf0, "var_phenotype": vp0},
-        "B": {"mean_phenotype": mp1, "mean_fitness": mf1, "var_phenotype": vp1},
+        "A": {"mean_fitness": mf0},
+        "B": {"mean_fitness": mf1},
     }
     return data
 
@@ -298,7 +286,7 @@ if __name__ == "__main__":
     g = set_up_demographic_model(Ne=Ne)
     print(g)
 
-    pop, recorder = run_sim(L, g, mu, optimum=optimum, mean=mean, shape_param=shape_param)
+    pop, recorder = run_sim(L, g, mu, mean=mean, shape_param=shape_param)
 
     ## Dump to tskit
     print(f"Dumping to tskit")
