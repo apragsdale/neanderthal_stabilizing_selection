@@ -54,8 +54,8 @@ def frequency_dip(a_vals, r_max, gens, p0, ax_q, VS=1, legend=True):
 plt.rcParams["legend.title_fontsize"] = "xx-small"
 matplotlib.rc("xtick", labelsize=6)
 matplotlib.rc("ytick", labelsize=6)
-matplotlib.rc("axes", labelsize=7)
-matplotlib.rc("axes", titlesize=7)
+matplotlib.rc("axes", labelsize=6)
+matplotlib.rc("axes", titlesize=6)
 matplotlib.rc("legend", fontsize=6)
 
 
@@ -167,5 +167,9 @@ frequency_dip([0.01, 0.02, 0.05], 1e-2, 2000, 0.05, ax3)
 
 plt.tight_layout()
 plt.subplots_adjust(hspace=0.4, top=0.98, bottom=0.12, left=0.1, right=0.99)
+
+fig.text(0.02, 0.97, "A", fontsize=7, va="center", ha="center")
+fig.text(0.33, 0.97, "B", fontsize=7, va="center", ha="center")
+fig.text(0.33, 0.49, "C", fontsize=7, va="center", ha="center")
 plt.savefig("r35-summary.pdf")
 
