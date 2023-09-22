@@ -35,9 +35,11 @@ def frequency_dip(a_vals, r_max, gens, p0, ax_q, VS=1, legend=True):
     rs_plot = 100 * np.concatenate((-rs[:0:-1], rs))
     for a in a_vals:
         qs = np.zeros(len(rs))
-        s = a**2 / 2 / VS
+        s = a ** 2 / 2 / VS
         for i, r_dist in enumerate(rs):
-            p, q, D = trajectories(p0, p0, p0 - p0**2, generations=gens, r=r_dist, s=s)
+            p, q, D = trajectories(
+                p0, p0, p0 - p0 ** 2, generations=gens, r=r_dist, s=s
+            )
             qs[i] = q[-1]
         qs = np.concatenate((qs[:0:-1], qs))
         ax_q.plot(rs_plot, qs, label=f"$a={a}$")
@@ -46,8 +48,6 @@ def frequency_dip(a_vals, r_max, gens, p0, ax_q, VS=1, legend=True):
     ax_q.set_ylim(bottom=0)
     ax_q.set_xlabel("Distance from selected locus (cM)")
     ax_q.set_ylabel("Introgressed ancestry")
-
-
 
 
 # set font sizes
@@ -165,6 +165,15 @@ ax2.text(700, 0.041, "$\sigma_M=0.01$", va="center", ha="center", fontsize=6)
 ax3 = plt.subplot2grid(grid, (1, 2), colspan=4)
 frequency_dip([0.01, 0.02, 0.05], 1e-2, 2000, 0.05, ax3)
 
+ax3.text(
+    0.55,
+    0.01,
+    "Introgressed alleles are\nselected against",
+    fontsize=6,
+    va="center",
+    ha="center",
+)
+
 plt.tight_layout()
 plt.subplots_adjust(hspace=0.4, top=0.98, bottom=0.12, left=0.1, right=0.99)
 
@@ -172,4 +181,3 @@ fig.text(0.02, 0.97, "A", fontsize=7, va="center", ha="center")
 fig.text(0.33, 0.97, "B", fontsize=7, va="center", ha="center")
 fig.text(0.33, 0.49, "C", fontsize=7, va="center", ha="center")
 plt.savefig("r35-summary.pdf")
-
