@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{color}
 
+\usepackage{setspace}
+
 \usepackage{xr}
 \externaldocument{supplement}
 
@@ -15,96 +17,98 @@
 \newcommand{\aprcomment}[1]{{\textcolor{blue}{Comment: #1}}}
 \newcommand{\E}{\mathbb{E}}
 
-\title{Stabilizing selection, archaic introgression, and the distribution
-of shared functional variation}
+\title{Archaic introgression and the distribution
+of shared functional variation under stabilizing selection}
 \author{APR}
 \date{\today}
 
 \begin{document}
 \maketitle    
 
+
 \begin{abstract}
     .
 \end{abstract}
 
+\onehalfspacing
+
 \section*{Introduction}
 
-Genomic studies have shown that admixture is a common occurrance between
-diverged populations and closely related taxa \citep{brandvain2014speciation,
-skoglund2015ancient,suvorov2022widespread}, and potentially has been widespread
-in primate \citep{tung2017contribution,sorensen2023genome} and hominin
-\citep{wolf2018outstanding,peter2020100} evolution. Understanding the effects
-of admixture on phenotypic and molecular variation is therefore relevant to
-many natural systems, including to studies of the genetic basis of complex
-traits and diseases. In particular, archaic introgression in \emph{Homo
-sapiens} involving Neanderthals and Denisovans has recently attracted
-considerable attention, both in understanding the historical processes leading
-to observed distributions of introgressed DNA in present-day populations
-\citep{prufer2014complete,villanea2019multiple,chen2020identifying} as well as
-its contribution to quantitative traits
+Genomic surveys of natural systems suggest that historical admixture among
+diverged populations or closely related taxa commonly occors
+\citep{brandvain2014speciation,skoglund2015ancient,suvorov2022widespread} and
+is potentially widespread in primate
+\citep{tung2017contribution,sorensen2023genome} and hominin
+\citep{wolf2018outstanding,peter2020100} evolution. Admixture may therefore be
+an important driver of phenotypic and molecular variation and shape the genetic
+basis of complex traits. In humans, archaic introgression involving
+Neanderthals and Denisovans has attracted considerable attention, with efforts
+to describe the historical processes leading to observed distributions of
+introgressed DNA in present-day populations
+\citep{prufer2014complete,villanea2019multiple,chen2020identifying} and its
+contribution to quantitative traits
 \citep{sankararaman2016combined,wei2023lingering}.
 
-After their introduction through admixture, introgressed alleles may be
-selected for or against. Some introgressed haplotypes appear to have been
-positively selected in modern humans
+Once introduced through admixture, introgressed alleles may be selected for or
+against. Some introgressed haplotypes were positively selected in modern humans
 \citep{huerta2014altitude,racimo2017signatures,enard2018evidence,gower2021detecting},
-possibly because such alleles are locally adaptive and provide a fitness
-advantage when encountering a novel environment. Despite these cases of
-adaptive introgression, introgressed alleles were more likely to have been
-negatively selected in modern humans
-\citep{harris2016genetic,juric2016strength}. As Neanderthal and Denisovan
-population sizes are thought to have been relatively small for hundreds of
-thousands of years, theory predicts that they would accumulate deleterious
-variation at a faster rate than larger populations. Introgressed haplotypes
-would then carry more deleterious variants, which would quickly be selected
-against after admixture. \aprcomment{Double check the following statements.} In
-mapping the distribution of haplotypes identified as introgressed from
-Neanderthals, there is a reduction of Neanderthal-related ancestry in enhancers
-and regulatory regions
-\citep{petr2019limits,telis2020selection,yermakovich2023long}. This
-Neanderthal-allelic depletion, or ``deserts,'' support the hypothesis that
-introgressed functional alleles were selected against
+possibly due to locally adaptive variation that provided fitness advantages as
+humans encountered novel environments. Despite some cases of adaptive
+introgression, introduced alleles were more likely to have been selected
+against in modern humans \citep{harris2016genetic,juric2016strength}. Since
+Neanderthal and Denisovan population sizes were relatively small for hundreds
+of thousands of years, theory predicts they would have accumulated deleterious
+variants at an increased rate. Introgressed haplotypes loaded with more
+deleterious mutations would then have quickly been selected against after
+admixture. Mapping the distribution of Neanderthal-introgressed haplotypes in
+humans shows a reduction of Neanderthal-related ancestry in enhancers and
+regulatory regions
+\citep{petr2019limits,telis2020selection,yermakovich2023long}. These
+``deserts'' of Neanderthal ancestry support the hypothesis that introgressed
+functional alleles were selected against
 \citep{sankararaman2014genomic,sankararaman2016combined}.
 
-There is genetic evidence that early \emph{H. sapiens} reciprocally contributed
-to Neanderthal genomes \citep{kuhlwilm2016ancient,hubisz2020mapping}, with
-introgression in the reverse direction occurring tens or hundreds of thousands
-of years before the Neanderthal-to-human event during the global dispersal of
-later humans. This is supported by ``near modern'' \emph{H.  sapiens} outside
-of African around 120--100ka or earlier
+There is growing genetic evidence that early \emph{H. sapiens} reciprocally
+contributed to Neanderthal genomes
+\citep{kuhlwilm2016ancient,hubisz2020mapping,harris2023diverse}. This
+human-to-Neanderthal introgression would have occured tens or hundreds of
+thousands of years prior to Neanderthal introgression in humans during modern
+human global dispersal around 60 ka. This is supported by ``near modern''
+\emph{H. sapiens} outside of African around 120--100ka or earlier
 \citep{schwarcz1988esr,grun2005u,beyer2021climatic}, potentially overlapping
 with Neanderthals and providing opportunities for early contacts. While
 estimates of the genomic contribution of early \emph{H. sapiens} to
-Neanderthals vary \citep{kuhlwilm2016ancient,hubisz2020mapping}, up to 3--5\%
-of later Neanderthal genomes may have been contributed through introgression
-from humans to Neanderthals. Under the reasoning that \emph{H.
-sapiens}-related haplotypes carried fewer deleterious alleles,
-human-introgressed DNA would have been favored in Neanderthal genomes. The
-replacement of Neanderthal mitochondrial and Y chromosomes by early human
-haplotypes supports this model \citep{posth2017deeply,petr2020evolutionary}.
+Neanderthals vary, up to $\sim5\%$ of later Neanderthal genomes may have been
+contributed through introgression from humans to Neanderthals
+\citep{harris2023diverse}. If \emph{H. sapiens}-related haplotypes carried
+fewer deleterious alleles due to their larger long-term effective population
+size, human-introgressed DNA would have been favored in Neanderthal genomes.
+The replacement of Neanderthal mitochondrial and Y chromosomes by early human
+haplotypes supports such a model of post-admixture selection in the Neanderthal
+lineage \citep{posth2017deeply,petr2020evolutionary}.
 
 Models for selection against introgressed alleles are often based on load
 arguments (in particular, differences in the rate of accumulation of
 unconditionally deleterious variation in populations of different sizes) or
-hybrid incompatibilities \citep{muller1942isolating}. These arguments are
-founded primarily in population genetics theory, with little notion of genetic
-variation contributing to phenotypic variation that selection operates on.
-Most phenotypic traits are thought to be under stabilizing selection
+hybrid incompatibilities \citep{muller1942isolating}. Such arguments, founded
+in population genetics theory, rarely take into account selection operating on
+phenotypic variation or the relationship between genetic and phenotypic
+variation. Many phenotypic traits are thought to be under stabilizing selection
 \citep{sanjak2018evidence,sella2019thinking}, including gene regulation
-\citep{gilad2006natural,hodgins2015gene,price2022detecting}. This is relevant
-to selection on Neanderthal-introduced alleles in modern humans, as the some of
-the strongest signals of selection against such alleles occur in regulatory
-regions \citep{sankararaman2014genomic}.
+\citep{gilad2006natural,hodgins2015gene,price2022detecting}. Because some of
+the strongest signals of selection against Neanderthal-introduced alleles are
+in regulatory regions \citep{sankararaman2014genomic}, stabilizing selection on
+quantitative traits is particularly relevant to the dynamics of functional
+genetic variation after introgression.
 
-Stabilizing selection on a trait acts to maintain the phenotypic distribution
-of that trait near some trait optimum, which is achieved by reducing phenotypic
-variation (Figure~\ref{fig:one-pop}A). When the mean phenotype of the
-population is close to the phenotypic optimum, classical models predict that
-alleles contributing to such a trait are subject to underdominant selection,
-i.e., selection against the minor allele at a locus
-\citep{robertson1956effect}. This has proven to be a useful model for
-understanding allele frequencies of variants contributing to a trait under
-stabilizing selection in the single-population setting
+Stabilizing selection acts to maintain the phenotypic distribution of a trait
+near some optimum, which is achieved by reducing phenotypic variation
+(Figure~\ref{fig:one-pop}A). When the mean phenotype of the population is close
+to the phenotypic optimum, classical models predict that alleles contributing
+to such a trait are subject to underdominant selection, i.e., selection against
+the minor allele at a locus \citep{robertson1956effect}. This has proven to be
+a useful model for understanding allele frequencies of variants contributing to
+a trait under stabilizing selection in single-population settings
 \citep[e.g.,][]{keightley1988quantitative, simons2018population,
 hayward2022polygenic}.
 
@@ -115,26 +119,27 @@ hayward2022polygenic}.
         \textbf{Stabilizing selection and additive genetic variance in one population.}
         \aprcomment{See comparisons to simulations assuming free recombination in
         Figures~\ref{fig:one-popA}--\ref{fig:one-popC}.}
+        \aprcomment{$w$ and $f$ need to match text}
     }
     \label{fig:one-pop}
 \end{figure}
 
-In two diverged populations, the genomic architecture of a trait under
-stabilizing selection has a higher rate of turnover compared to neutrally
-evolving loci \citep{yair2022population}. We might therefore expect an
-accumulation of fixed differences between the \emph{H. sapiens} and Neanderthal
-branches for alleles contributing to a trait, even when the mean phenotype in
-each population is close to the same trait optimum. When alleles that are fixed
-in one population are introduced to another population in which they were
-previously absent, they will be at low frequency and subsequently selected
-against. Likewise, if the ancestral allele is reintroduced to a population
-fixed for a derived allele, the ancestral allele will be at low frequency and
-will be selected against. In either case we should expect the introgressed
-allele, whether ancestral or derived, to be selected against, regardless the
-historical relative sizes of the populations involved. This prediction
-contrasts with the population-genetics ``load'' model, in which haplotypes with
-fewer deleterious variants (such as those from the population with larger
-historical size) are favored after introgression in either direction.
+In diverged populations, the genomic architecture of a trait under stabilizing
+selection has a higher rate of turnover compared to neutrally evolving loci
+\citep{yair2022population}. We might therefore expect an accumulation of fixed
+differences in the \emph{H. sapiens} and Neanderthal lineages at loci
+contributing to a trait, even when the mean phenotype in each population is
+close to the same trait optimum. When a derived allele at high frequency in one
+population is introduced to another population in which is was previously
+absent, it will be at low frequency and subsequently selected against.
+Likewise, if the ancestral allele is reintroduced to a population fixed for a
+derived allele, the ancestral allele will be at low frequency and will be
+selected against. In either case we should expect selection against the
+introgressed allele, whether ancestral or derived and regardless the historical
+relative sizes of the populations involved. This prediction contrasts with the
+population-genetics ``load'' model, in which haplotypes with fewer deleterious
+variants (such as those from the population with larger historical size) are
+favored after introgression in either direction.
 
 
 \subsection*{Theory and model}
@@ -147,24 +152,24 @@ genotype at that locus (i.e., the number of alleles they carry at that locus).
 For unlinked loci, the expected additive genetic variance is \(V_A = \sum_l
 2p_l(1-p_l)a_l^2\), where $p_l$ is the allele frequency at locus $l$. We ignore
 dominance and epistatic effects, so that \(V_G = V_A\), assuming no linkage.
-We can further ingore environmental effects \citep{simons2018population}, so
-that the phenotypic variance \(V_P=V_A\).
+We further ingore environmental effects \citep{simons2018population}, so that
+the phenotypic variance \(V_P=V_A\).
 
 Stabilizing selection acts to reduce phenotypic variation around the optimum
-value $o$, and we assume a Gaussian fitness function so that relative fitness
-is given by \(f(G_i | O, V_S) = \exp{(-(G_i - O) / 2 V_S)}\). $V_S$ can be
-interpreted as the strength of selection on the trait, where larger $V_S$
-implies weaker selection. For a population with mean phenotype at (or very
-close to) the optimum, the mean fitness of the population (assuming a roughly
-normal distribution of phenotypic values in the population) is
-\[\bar{w} \approx \int_{-\infty}^\infty f(G | O, V_S) \mathcal{N}(0, V_G) dG
-\approx \left(\frac{V_S}{V_S+V_G}\right)^{1/2}.\]
-Thus, as the genetic variance increases, mean fitness among individuals in the
-population decreases.
+value $O$ (typically set to zero), and we assume a Gaussian fitness function so
+that relative fitness is given by \(f(G_i | O, V_S) = \exp{(-(G_i - O)^2 / 2
+V_S)}\). $V_S$ can be interpreted as the strength of selection on the trait,
+where larger $V_S$ implies weaker selection. For a population with mean
+phenotype at (or very close to) the optimum, the mean fitness of the population
+(assuming a roughly normal distribution of phenotypic values in the population)
+is \[\bar{w} \approx \int_{-\infty}^\infty f(G | 0, V_S) \mathcal{N}(0, V_G) dG
+= \left(\frac{V_S}{V_S+V_G}\right)^{1/2}.\] Thus, as the genetic variance
+increases, mean fitness among individuals in the population decreases.
 
 \subsubsection*{Mutation rates and effect sizes}
 
-If all alleles contribute equally to the trait (as \(\pm a\)),
+If all alleles contribute equally to the trait
+(with effect sizes \(\pm a\) occurring in equal proportion),
 \citet{keightley1988quantitative} showed that the dynamics of $V_G$ can be
 approximated with the recursion
 \[V_{G,t+1} \approx V_{G,t}\left(1-a^2/2(V_S+V_{G,t})\right)
@@ -173,9 +178,11 @@ where $\mu$ is the per-haploid, per-generation rate of mutation. In the
 large-population-size limit, this gives the well-known result
 \[\tilde{V_G} \approx 4\mu V_S,\] provided \(V_G \ll V_S\).
 Mutations are not expected to each have the same effect size $a$, but
-rather will be drawn from some distribution. Here, we will assume mutation
+rather will be drawn from some distribution. Throughout, we assume mutation
 effect sizes are drawn from a normal distribution with mean 0 and given
 variance $V_M$.
+
+\aprcomment{where does the $4\mu Ne V_M$ (Lande) result come from? point to fig 1}
 
 \subsubsection*{Approximating allelic dynamics via underdominance}
 
@@ -196,13 +203,15 @@ and the expected change in variance of the allele frequency per generation is
 %$p=1/2$ is an unstable equilibrium.
 
 We extend the moments-based solution for the sample site-frequency spectrum
-(SFS) \citep{jouganous2017} to include underdominance with given selection
-coefficient $s$ (\(=a^2/2(V_S+V_G)\)). The contribution of alleles with effect
-size $a$ to the total genetic variance $V_G$ is then found by computing the
-expected pairwise diversity from the SFS (with sample size $n$, $\Phi_n$), as
+(SFS) \citep{jouganous2017inferring} to include underdominance with given
+selection coefficient $s$ (\(=a^2/2(V_S+V_G)\)). The contribution of alleles
+with effect size $a$ to the total genetic variance $V_G$ is then found by
+computing the expected pairwise diversity from the SFS (with sample size $n$,
+$\Phi_n$), as
 \[V_{G,a} = 2a^2\sum_{j=1}^{n-1}\frac{j(n-j)}{n(n-1)}\Phi_n(j|a,\mu_a)da.\]
-Here, $\mu_a$ is the mutation rate of alleles with effect size $a$. The total
-genetic variance is then 
+Here, $\mu_a$ is the mutation rate of alleles with effect size $a$. Then
+assuming a normal distribution of effect sizes for new mutations, the total
+genetic variance is
 \[V_G=\int_{-\infty}^\infty V_{G,a}\mathcal{N}(0,V_M).\]
 
 Figure~\ref{fig:one-pop}C shows that if $V_G$ is non-negligible compared to
@@ -226,13 +235,13 @@ non-constant demography that increase or reduce $V_G$.
 \subsubsection*{Demographic history}
 
 Our numerical solution for the SFS allows for non-constant population size
-histories, population splits, continuous migration, and admixture. In this
-study, we consider relatively simple scenarios involving population splits with
+histories, population splits, continuous migration, and admixture. Here, we
+consider relatively simple scenarios involving population splits with
 subsequent introgression events. We focus on parameter regimes relevant to
-human-Neanderthal history. In the simplest model -- which is not meant to
+human-Neanderthal history. In a simple toy model -- which is not meant to
 perfectly match any particular known or inferred history, but instead
 demonstrate the effect of reciprocal introgression following population
-divergence -- a population of size $N_e=10\,000$ splits into two, on remaining
+divergence -- a population of size $N_e=10\,000$ splits into two, one remaining
 size $10\,000$ and the other shrinking to size $1\,000$. They remain isolated
 for $2N_e$ generations (or 500 thousand years, assuming an average generation
 time of 25 years) and then introgression occurs from one branch to the other,
@@ -570,6 +579,8 @@ steady-state expectation relatively rapidly.
 \section{Appendix}
 
 \subsection{Additive genetic variance after admixture}
+
+\aprcomment{Start with ``Here we show that\dots''}
 
 Suppose two population (labeled 0 and 1) diverged some time in the past and
 then admix in proportions $f$ and $1-f$.

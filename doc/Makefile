@@ -5,6 +5,9 @@ manuscript.pdf: manuscript.tex manuscript.bib
 	bibtex supplement
 	pdflatex supplement.tex
 	pdflatex manuscript.tex
+	pdflatex supplement.tex
+	pdflatex manuscript.tex
+
 
 manuscript.ps: manuscript.dvi
 	dvips manuscript
