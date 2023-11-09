@@ -22,7 +22,10 @@
 \begin{document}
 \maketitle
 
-\textbf{TODO: Set labels to ``SX''.}
+\renewcommand{\thepage}{S\arabic{page}}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
 
 \section{Supplemental Figures}
 
@@ -58,10 +61,20 @@
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/vary_SD.pdf}
+    \includegraphics{../figures/model_comparison.SD_0.01.mu_0.001_0.025.pdf}
     \caption{
-        \textbf{The Lande-Turelli continuum.}
+        \textbf{Low mutational variance, deviations btw fwdpy11 and predictions.}
     }
-    \label{fig:turreli-lande}
+    \label{fig:low_VM}
 \end{figure}
+
+\begin{figure}[ht!]
+    \centering 
+    \includegraphics{../figures/model_comparison.SD_0.05.mu_0.001_0.025.pdf}
+    \caption{
+        \textbf{High mutational variance, deviations btw fwdpy11 and predictions.}
+    }
+    \label{fig:high_VM}
+\end{figure}
+
 \end{document}

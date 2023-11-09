@@ -35,7 +35,7 @@ of shared functional variation under stabilizing selection}
 \section*{Introduction}
 
 Genomic surveys of natural systems suggest that historical admixture among
-diverged populations or closely related taxa commonly occors
+diverged populations or closely related taxa commonly occurs
 \citep{brandvain2014speciation,skoglund2015ancient,suvorov2022widespread} and
 is potentially widespread in primate
 \citep{tung2017contribution,sorensen2023genome} and hominin
@@ -71,14 +71,14 @@ functional alleles were selected against
 There is growing genetic evidence that early \emph{H. sapiens} reciprocally
 contributed to Neanderthal genomes
 \citep{kuhlwilm2016ancient,hubisz2020mapping,harris2023diverse}. This
-human-to-Neanderthal introgression would have occured tens or hundreds of
-thousands of years prior to Neanderthal introgression in humans during modern
-human global dispersal around 60 ka. This is supported by ``near modern''
-\emph{H. sapiens} outside of African around 120--100ka or earlier
+human-to-Neanderthal introgression occured tens or hundreds of thousands of
+years prior to Neanderthal introgression in humans during modern human global
+dispersal around 60 ka. This is supported by ``near modern'' \emph{H. sapiens}
+outside of African around 120--100ka or earlier
 \citep{schwarcz1988esr,grun2005u,beyer2021climatic}, potentially overlapping
 with Neanderthals and providing opportunities for early contacts. While
 estimates of the genomic contribution of early \emph{H. sapiens} to
-Neanderthals vary, up to $\sim5\%$ of later Neanderthal genomes may have been
+Neanderthals vary, around $6\%$ of later Neanderthal genomes may have been
 contributed through introgression from humans to Neanderthals
 \citep{harris2023diverse}. If \emph{H. sapiens}-related haplotypes carried
 fewer deleterious alleles due to their larger long-term effective population
@@ -103,12 +103,12 @@ genetic variation after introgression.
 
 Stabilizing selection acts to maintain the phenotypic distribution of a trait
 near some optimum, which is achieved by reducing phenotypic variation
-(Figure~\ref{fig:one-pop}A). When the mean phenotype of the population is close
+(Figure~\ref{fig:stab-sel}A). When the mean phenotype of the population is close
 to the phenotypic optimum, classical models predict that alleles contributing
 to such a trait are subject to underdominant selection, i.e., selection against
 the minor allele at a locus \citep{robertson1956effect}. This has proven to be
-a useful model for understanding allele frequencies of variants contributing to
-a trait under stabilizing selection in single-population settings
+a useful model for understanding genetic architectures of traits under
+stabilizing selection in single-population settings
 \citep[e.g.,][]{keightley1988quantitative, simons2018population,
 hayward2022polygenic}.
 
@@ -121,53 +121,57 @@ hayward2022polygenic}.
         Figures~\ref{fig:one-popA}--\ref{fig:one-popC}.}
         \aprcomment{$w$ and $f$ need to match text}
         \aprcomment{Add the SHC model, and the ``vary SD'' fig as a panel here}
+        \aprcomment{First figure should just be two left panels. Combine two
+        right panels to figure 2.}
     }
-    \label{fig:one-pop}
+    \label{fig:stab-sel}
 \end{figure}
 
-In diverged populations, the genomic architecture of a trait under stabilizing
-selection has a higher rate of turnover compared to neutrally evolving loci
-\citep{yair2022population}. We might therefore expect an accumulation of fixed
-differences in the \emph{H. sapiens} and Neanderthal lineages at loci
-contributing to a trait, even when the mean phenotype in each population is
-close to the same trait optimum. When a derived allele at high frequency in one
-population is introduced to another population in which is was previously
-absent, it will be at low frequency and subsequently selected against.
-Likewise, if the ancestral allele is reintroduced to a population fixed for a
-derived allele, the ancestral allele will be at low frequency and will be
-selected against. In either case we should expect selection against the
-introgressed allele, whether ancestral or derived and regardless the historical
-relative sizes of the populations involved. This prediction contrasts with the
-population-genetics ``load'' model, in which haplotypes with fewer deleterious
-variants (such as those from the population with larger historical size) are
-favored after introgression in either direction.
+In diverged populations, genetic variation contributing to a trait under
+stabilizing selection has a higher rate of turnover compared to neutrally
+evolving loci \citep{yair2022population}. We might therefore expect an
+accumulation of fixed differences in the \emph{H. sapiens} and Neanderthal
+lineages at loci contributing to such a trait, even when the mean phenotype in
+each population remains close to the same trait optimum. When a derived allele
+at high frequency in one population is introduced to another population in
+which is was previously absent, it will be at low frequency and subsequently
+selected against. Likewise, if the ancestral allele is reintroduced to a
+population fixed for a derived allele, the ancestral allele will be at low
+frequency and will be selected against. In either case we should expect
+selection against the introgressed allele, whether ancestral or derived and
+regardless the historical relative sizes of the populations involved. This
+prediction contrasts with the population-genetics ``load'' model, in which
+haplotypes with fewer deleterious variants (such as those from the population
+with larger historical size) are favored after introgression in either
+direction.
 
 
 \subsection*{Model}
 
-We consider a polygenic trait such that an individual's (additive) genetic
+We consider a polygenic trait for which an individual's (additive) genetic
 value is the sum over all effects of alleles in their genome, so that for
 individual $i$, \(G_i = \sum_l g_{l, i} a_l\), where $a_l$ is the effect size
 of the derived allele at locus $l$, and \(g_{l,i}\in\{0,1,2\}\) is their
 genotype at that locus (i.e., the number of alleles they carry at that locus).
-For unlinked loci, the expected additive genetic variance is \(V_A = \sum_l
-2p_l(1-p_l)a_l^2\), where $p_l$ is the allele frequency at locus $l$. We ignore
-dominance and epistatic effects, so that \(V_G = V_A\), assuming no linkage.
-We further ingore environmental effects \citep{simons2018population}, so that
-the phenotypic variance \(V_P=V_A\).
+With no linkage between trait-affecting loci, the expected additive genetic
+variance is \(V_A = \sum_l 2p_l(1-p_l)a_l^2\), where $p_l$ is the allele
+frequency at locus $l$. We ignore dominance and epistatic effects, so that
+\(V_G = V_A\).  We further ingore environmental effects
+\citep{simons2018population}, so that the phenotypic variance \(V_P=V_A\).
 
 Stabilizing selection acts to reduce phenotypic variation around the optimum
-value $O$ (typically set to zero), and we assume a Gaussian fitness function so
-that relative fitness is given by \(f(G_i | O, V_S) = \exp{(-(G_i - O)^2 / 2
-V_S)}\). $V_S$ can be interpreted as the strength of selection on the trait,
-where larger $V_S$ implies weaker selection. For a population with mean
-phenotype at (or very close to) the optimum, the mean fitness of the population
-(assuming a roughly normal distribution of phenotypic values in the population)
-is \[\bar{w} \approx \int_{-\infty}^\infty f(G | 0, V_S) \mathcal{N}(0, V_G) dG
-= \left(\frac{V_S}{V_S+V_G}\right)^{1/2}.\] Thus, as the genetic variance
-increases, mean fitness among individuals in the population decreases.
+value $O$ (typally set to zero), and we assume a Gaussian fitness function
+(Figure~\ref{fig:stab-sel}A) so that relative fitness is given by \(f(G_i | O,
+V_S) = \exp{(-(G_i - O)^2 / 2 V_S)}\). $V_S$ can be interpreted as the strength
+of selection on the trait, where larger $V_S$ implies weaker selection. For a
+population with mean phenotype at (or very close to) the optimum, the mean
+fitness of the population (assuming a roughly normal distribution of phenotypic
+values in the population) is \[\bar{w} \approx \int_{-\infty}^\infty f(G | 0,
+V_S) \mathcal{N}(0, V_G) dG = \left(\frac{V_S}{V_S+V_G}\right)^{1/2}.\] Thus,
+as the genetic variance increases, mean fitness among individuals in the
+population decreases.
 
-\subsubsection*{Mutation rates and effect sizes}
+\subsubsection*{Mutation rates, effect sizes and genetic variance}
 
 If all alleles contribute equally to the trait
 (with effect sizes \(\pm a\) occurring in equal proportion),
@@ -176,14 +180,23 @@ approximated with the recursion
 \[V_{G,t+1} \approx V_{G,t}\left(1-a^2/2(V_S+V_{G,t})\right)
 \left(1-1/2N_e\right) + 2 \mu a^2,\]
 where $\mu$ is the per-haploid, per-generation rate of mutation. In the
-large-population-size limit, this gives the well-known result
-\[\tilde{V_G} \approx 4\mu V_S,\] provided \(V_G \ll V_S\).
-Mutations are not expected to each have the same effect size $a$, but
-rather will be drawn from some distribution. Throughout, we assume mutation
-effect sizes are drawn from a normal distribution with mean 0 and given
-variance $V_M$.
+large-population-size limit, this gives the well-known result for
+steady-state additive genetic variance,
+\[V_G \approx 4\mu V_S,\] provided \(V_G \ll V_S\).
 
-\aprcomment{where does the $4\mu Ne V_M$ (Lande) result come from? point to fig 1}
+Mutations are not expected to each have the same effect size $a$, but rather
+follow some distribution. Throughout, we assume effect sizes are drawn from a
+normal distribution with mean 0 and given variance $V_M$. When population sizes
+or effect sizes are small, drift dominates the dynamics of $V_G$, and at steady
+state \citet{lande1976natural} found \[V_G \approx 4 N_e \mu V_M.\]
+Interpolating between the selection- and drift-dominated regimes,
+\begin{align}\label{eq:SHC}
+    V_G & \approx \frac{4 \mu V_S}{1 + \frac{VS}{N_e V_M}}.
+\end{align}
+This, the ``stochastic
+house-of-Cards'' (SHC) approximation (Figure~\ref{fig:stab-sel}B), was given by
+\citet{burger1989much} and is discussed in detail in \citet[][Ch.
+28]{walsh2018evolution}.
 
 \subsubsection*{Approximating allelic dynamics via underdominance}
 
@@ -215,12 +228,12 @@ assuming a normal distribution of effect sizes for new mutations, the total
 genetic variance is
 \[V_G=\int_{-\infty}^\infty V_{G,a}\mathcal{N}(0,V_M).\]
 
-Figure~\ref{fig:one-pop}C shows that if $V_G$ is non-negligible compared to
-$V_S$, ignoring $V_G$ and using $s=a^2/2V_S$ leads to lower estimates of
-additive genetic variance. When mutation rates are large so that $V_G$ is not
-small compared to $V_S$, using $s=a^2/2(V_S+V_G)$ provides estimates of $V_G$
-that closely match simulations assuming free recombination between loci
-(Figure~\ref{fig:toy-admixture}C,D). Because $V_G$ can change over time, this
+If $V_G$ is non-negligible compared to $V_S$, ignoring $V_G$ and using
+$s=a^2/2V_S$ leads to lower estimates of additive genetic variance
+(Figure~\ref{fig:toy-admixture}B). When mutation rates are large so that $V_G$
+is not small compared to $V_S$, using $s=a^2/2(V_S+V_G)$ provides estimates of
+$V_G$ that closely match simulations assuming free recombination between loci
+(Figure~\ref{fig:toy-admixture}X,Y). Because $V_G$ can change over time, this
 means that $s$ is no longer constant, but can change due to factors such as
 non-constant demography that increase or reduce $V_G$.
 
@@ -228,7 +241,11 @@ non-constant demography that increase or reduce $V_G$.
     \centering
     \includegraphics{../figures/reciprocal_admixture.pdf}
     \caption{
-        \textbf{}
+        \textbf{Predicting the genetic variance of a trait under stabilizing
+        seletion and non-steady state demography.}
+        \aprcomment{Make it in generations?}
+        \aprcomment{Right two panels should go to supplement, move single-pop
+        with size change from figure 1 to here.}
     }
     \label{fig:toy-admixture}
 \end{figure}
@@ -247,7 +264,7 @@ size $10\,000$ and the other shrinking to size $1\,000$. They remain isolated
 for $2N_e$ generations (or 500 thousand years, assuming an average generation
 time of 25 years) and then introgression occurs from one branch to the other,
 contributing $5\%$ ancestry to the recipient population
-(Figure~\ref{fig:toy-admixture}A,B).
+(Figure~\ref{fig:toy-admixture}X,Y).
 
 The second model is meant to more closely resemble inferred human-Neanderthal
 history, in which the ancestral population of size $N_e=10\,000$ splits into
@@ -260,8 +277,19 @@ expanding human population at 50ka, after which they go extinct
 
 In each scenario, we track genetic diversity and phenotypic variance before and
 after admixture to understand allele frequency and haplotype dynamics. The
-trait optimum is kept at $0$ in all branches, and the strength of selection
-$V_S=1$ remains constant.
+trait optimum is kept at $0$ in all branches, so that no optimum shift occurs,
+and the strength of selection $V_S=1$ remains constant.
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics{../figures/neanderthal_admixture.pdf}
+    \caption{
+        \textbf{}
+        \aprcomment{Show total/introgressed/non-introgressed in both directions
+        with both $\sigma_M$.}
+    }
+    \label{fig:neand-to-human}
+\end{figure}
 
 \section*{Results}
 
@@ -273,158 +301,154 @@ between populations and the effects of those alleles. Assuming no linkage,
 dominance or epistasis, \(V_G=\sum_l 2p_l(1-p_l)a_l^2\). After admixture, with
 proportion $f$ contributed by the source population (labeled 0) into the focal
 population (labeled 1), \(p_l = fp_{l,0} + (1-f)p_{l,1}\). Plugging into the
-expression for $V_G$, and after some simple algebra (Appendix~AX), we can
-express the expected genetic variance directly after admixture as \[V_G =
-fV_{G,0} + (1-f) V_{G,1} + 2f(1-f)\sum_l F_{2,l} a_l^2,\] where $F_2 = (p_0 -
-p_1)^2$ is the squared difference in allele frequencies at a locus
-\citep{peter2016admixture}. This result is known
+expression for $V_G$ and after some simple algebra (Appendix,
+section~\ref{sec:VG-admixture}), we can express the expected genetic variance
+directly after admixture as \[V_G = fV_{G,0} + (1-f) V_{G,1} + 2f(1-f)\sum_l
+F_{2,l} a_l^2,\] where $F_2 = (p_0 - p_1)^2$ is the squared difference in
+allele frequencies at a locus \citep{peter2016admixture}. This result is known
 \citep[e.g.,][]{tufto2000quantitative}, showing that additive variance is equal
 to that in the source populations weighted by their contributions, plus a term
 that depends on the divergence at trait-affecting loci between the populations
 weighted by the quadratic factor $2f(1-f)$.
 
-In general, $F_2$ at a given locus will depend on the demographic history
+$F_2$ at a given locus depends on the demographic history
 relating the two populations and the effect size at the locus due to selection
 on the trait. In the infinitesimal limit, involving many loci each of
 vanishingly small effect, dynamics at a given locus will be approximately
-neutral, so that $F_2$ depends only on the demography. In this case
-\begin{align*}
+neutral, so that $F_2$ depends only on the demography. In this case,
+\begin{align}
     V_G & \approx f V_{G,0} + (1-f) V_{G,1} + 2f(1-f)\mathbb{E}[F_2] \sum_l a_l^2 \\
+    \nonumber
     & = f V_{G,0} + (1-f) V_{G,1} + 2f(1-f)\mathbb{E}[F_2] L V_M,
-\end{align*}
-where $V_M$ is the variance of effect sizes of new mutations (assuming the mean
-is zero), and $L$ is the number of trait affecting loci.
+\end{align}
+where $L$ is the number of trait affecting loci.
+
+\subsubsection*{Predicted $V_G$ from the SFS}
 
 For $a \not\approx 0$, the assumption of neutral evolution will lead to
 overestimates of $F_2$ compared to underdominant selection. We can compute
 expected $V_G$ both before and after admixture using the diffusion
 approximation for the joint SFS with underdominance. Comparing to simulations
-with free recombination between loci (Appendix~AY), we find that this provides
-an excellent fit to average observed $V_G$ over time
-(Figure~\ref{fig:toy-admixture}C,D). In general, admixture causes a sudden
-increase in $V_G$ followed by a fairly rapid return to pre-admixture levels.
+with free recombination between loci (Appendix,
+section~\ref{sec:VG-admixture}), we find that this provides an excellent fit to
+average observed $V_G$ over time (Figure~\ref{fig:toy-admixture}C,D). In
+general, admixture causes a sudden increase in $V_G$ followed by a fairly rapid
+return to pre-admixture levels.
 
 Modeling the dynamics of genetic variance using the SFS lets us examine
 contributions to $V_G$ from different classes of mutations, such as those at
 different frequencies or arising at different times, and how those
 contributions change over time. Of interest is the contribution to $V_G$ from
-mutations that were already segregating in the recipient population, those that
+alleles that were already segregating in the recipient population, those that
 were introduced through introgression, and new mutations since the time of
-admixture.
+admixture (Figure~\ref{fig:toy-admixture}). In many scenarios, the initial
+divergence of the two populations will have occurred long enough before the
+admixture event, so that the mutations underlying $V_G$ are largely unique in
+each population. After mixing, previously segregating and introgressed alleles
+go to fixation or loss, and the variance of the trait is increasingly due to
+new mutations. 
 
-Paragraph on the following (point to appendix and supplement):
-\begin{itemize}
-    \item Benefit of SFS -- partition by frequency classes (prev. seg vs introgressed)
-    \item VG from all both previously segregating and introgressed alleles decays,
-        replaced by VG due to new mutations
-    \item Dividing VG from introgressed alleles into introduced derived vs reintroduced
-        ancestral alleles shows the effect of differences in population sizes
-\end{itemize}
+Introgressed variation can initially make up a considerable portion of $V_G$,
+with those alleles being either newly introduced derived alleles or
+reintroduced ancestral alleles. The relative sizes of the two populations
+impacts the number of each, as derived alleles will accumulate more readily in
+a population with smaller effective size. Nonetheless, the increase in $V_G$
+can be fairly similar in either direction of introgrssion, as the term
+\(2f(1-f)\sum_l F_{2,l} a_l^2\) contributes in either case and can be much
+larger than $f V_G$ from the source population.
 
-\subsection*{Recurrent introgression and non-constant population size}
+\subsubsection*{Complex demography and partitioning heritability by origin of alleles}
 
-\begin{figure}[t!]
-    \centering
-    \includegraphics{../figures/neanderthal_admixture.pdf}
-    \caption{
-        \textbf{}
-    }
-    \label{fig:neand-to-human}
-\end{figure}
+We used a historical model more closely resembling inferred human-Neanderthal
+history (Figure~\ref{fig:neand-to-human}A) to explore the effects of population
+size changes and reciprocal admixture on the additive genetic architecture of
+traits under stabilizing selection. As expected
+(Figure~\ref{fig:toy-admixture}), population contractions decrease $V_G$ as the
+increased rate of drift reduces allelic diversity at trait-affecting loci, and
+introgression increases $V_G$ in both directions of gene flow.
 
-\begin{itemize}
-    \item In the demographic model more closely resembling inferred history
-        connecting humans and Neanderthals (Figure~\ref{fig:neand-to-human}A),
-        we see that demographic history and the distribution of effect sizes
-        of new mutations impact $V_G$
-    \item Additive genetic variance increases after introgression in both directions,
-        which is expected to result in a period of decreased mean fitness
-    \item Population contractions decrease $V_G$, as the increased rate of drift
-        reduces diversity at loci underlying the trait
-    \item TODO: compare to linked simulations
-\end{itemize}
+Because the genetic architectures considered here are purely additive, we can
+track mutations in an admixed populations by whether they were previously
+segregating, fixed or lost in either parental populations or if they arose as
+new mutations since the time of admixture (Methods Section X). This allows us
+to partition $V_G$ by contributions from these different sets of mutations. At
+low introgression proportions, as modeled here, the majority of $V_G$ is still
+contributed by previously segregating, non-introgressed mutations (Figure XAB).
+$V_G$ due to existing mutations decays monotonically over time and is fairly
+rapidly replace by new mutations (Figure XCD).
+
+The average contribution of introgressed vs. non-introgressed SNPs to $V_G$
+(i.e., $h^2$ per SNP) can similarly by tracked over time. For the
+human-Neanderthal-like demographic model and genetic architectures considered
+here, the contribution per SNP of introgressed variants is initally lower than
+that of non-introgressed variants. These contributions change over time,
+depending on mutational variance (Figure YA vs B), as well as demography
+(comparing the two directions of introgression, Figure YC D). When weighting
+$h^2$ per SNP of introgressed SNPs by matching to allele frequencies of
+non-introgressed variants (Methods), relative contributions depend sensitively
+on evolutionary parameters and the time since admixture.
+
+\aprcomment{In discussion, point out that this makes interpreting results, such
+as \cite{wei2023lingering}, challenging.}
 
 \begin{figure}[t!]
     \centering
     \includegraphics{../figures/human_admixture.pdf}
     \caption{
         \textbf{}
+        \aprcomment{Put $h^2$ per SNP into its own figure.}
     }
     \label{fig:human-to-neand}
 \end{figure}
 
-\begin{itemize}
-    \item Because we know if a mutation was previously segregating in the population
-        receiving migrants, we can partition variation by contributions from
-        segregating vs introgressed variants (whether introduced derived mutations
-        or reintroduced ancestral mutations)
-    \item At low introgression proportions, as here, the majority of $V_G$ is still
-        contributed by previously segregating mutations, which is then expected to
-        be steadily replaced by new mutations (Figure 2). $V_G$ due to introgressed
-        variation decays monotonically over time (Figure~\ref{fig:neand-to-human}C,D)
-    \item While the total $V_G$ due to introgressed variants decays, we can also
-        consider the average contribution of introgressed vs non-introgressed SNPs
-        to $V_G$ ($h^2$ per SNP) -- at least for this demographic model and
-        DES, the contribution per SNP of introgressed variants is initially lower
-        than those of previously segregating variants. These contributions change
-        over time, in a way that depends on both the genomic architecture underlying
-        the trait and demography
-    \item This dependence on both architecture and demography is apparent when
-        comparing to $V_G$ contributed by introgressed and non-introgressed variants
-        in the early human-to-Neanderthal admixture (Figure~\ref{fig:human-to-neand})
-        -- here, again the contribution
-        from introgressed variants to $V_G$ decays monotonically, but depending on
-        the distribution of effect sizes, relative per-SNP $h^2$ changes over time
-        (though in these cases introgressed $h^2$ per SNP remains lower than
-        non-introgressed, when considering mutations at matched allele frequencies)
-\end{itemize}
+\subsection*{Expected genetic variance with linkage}
 
-\subsection*{The effects of linkage}
+In the preceding sections, we find that approximating the dynamics of
+trait-affecting alleles using an underdominance model
+\citep{robertson1956effect} provides an excellent approximation of $V_G$ in
+complex demographic scenarios. However, this relies on an absence of linkage
+between trait-affecting alleles. The inclusion of linkage can lead to
+noticeable effects on expected $V_G$, so that Equation~\ref{eq:SHC} slightly
+overestimates $V_G$ at steady state
+\citep{burger1989much,burger1994distribution,walsh2018evolution}.
 
-\begin{itemize}
-    \item So far, we have considered model and simulation without linkage -- in this
-        case, the underdominance model provides an excellent approximation
-    \item Including linkage between sites dramatically complicates things, making
-        theorical or analytical progress difficult
-    \item To explore the effects of linkage, we used individual-based simulations
-        with a single large chromosome of size 1 Morgan, and varried the total
-        mutation rate per haploid and the variance of effect sizes of new mutations
-    \item We'll highlight two effects of linkage
-        \begin{itemize}
-            \item Deviations from expected $V_G$, as well as more complicated
-                short-term dynamics after admixture
-            \item The reduction in introgressed ancestry in the regions surrounding
-                trait-affecting alleles
-        \end{itemize}
-\end{itemize}
+To investigate the effects of linkage, we used chromosome-scale
+individual-based simulations. By varying the mutation rate and the variance of
+effect sizes of new mutations, we include scenarios ranging from low to high
+polygenicity and from weak to strong selection on individual alleles. In this
+and the following sections, we will highlight two effects of linkage. First,
+we observe deviations of $V_G$ from expectations without linkage, which can be
+large for highly polygenic traits. Second, selection on introgressed
+trait-affecting alleles results in a reduction of introgressed ancestry in
+surrounding regions.
 
-\subsubsection*{Effects of linkage on expected genetic variance}
+With linkage between two or more alleles affecting a trait under stabilizing
+selection, linkage disequilibrium (LD) can develop between alleles. Classicaly,
+stabilizing selection will cause mutations of opposite-signed effects to be in
+coupling LD and those of same-signed effects in repulsion LD
+\citep{bulmer1971effect}. This has the effect of reducing $V_G$. For lower
+mutational variances ($2N_e V_M\approx1$, Figure~\ref{fig:low_VM}), we observe
+this phenomenon. With low mutational input, and thus low polygenicity, $V_G$ in
+individual simulations closely matches expectations without linkage. As we
+increase the mutation rate, $V_G$ is reduced relative to those expectations.
+However, when the mutational variance is much larger ($2Ne V_m \approx 50$), we
+see the reverse trend (Figure~\ref{fig:high_VM}). At low mutation rate, there
+is a close match between observed $V_G$ and unlinked expectations, although
+simulated values are slightly higher. As the mutation rate increases, $V_G$
+increases to be relatively much larger that expectations, rather than smaller.
 
-\begin{figure}[t!]
-    \centering
-    \includegraphics{../figures/model_comparison.SD_0.01.mu_0.001_0.025}
-    \caption{}
-    \label{fig:linkage-deviations}
-\end{figure}
+The strength of the deviation of $V_G$ between models with and without linkage
+depends on a number of factors. The total mutation rate affects not only the
+polygenicity, with higher mutation rates causing higher number of segregating
+alleles, but also the mean recombination rate between those alleles, as they
+will be more or less densely distributed in the genome. The distribution of
+effect sizes plays an important role, as seen by the opposite trends in $V_G$
+relative to unlinked predictions, which are most apparent with high mutation
+rates. There appear to be complex dynamics involving the Bulmer Effect
+\citep{bulmer1971effect} and interference between selected alleles
+\citep{hill1966effect}, which warrants careful investigation.
 
-\begin{itemize}
-    \item Stabilizing selection reduces $V_G$ by selecting against minor alleles
-        (underdominance), but with linkage it can also reduce $V_G$ by selecting
-        for haplotypes that carry opposite effect alleles that cancel out -- this
-        creates LD between positive and negative effect alleles at linked loci,
-        known as the Bulmer effect \citep{}
-    \item Thus, $V_G$ in simulations with linkage deviate from predictions
-        assuming underdominance alone
-    \item The severity of this deviation depends on a number of factors: mean
-        recombination rate between trait-affecting loci, the total mutation rate,
-        the effect sizes (and distribution of effect sizes of new mutations)
-    \item In general, lower mutation rates imply lower total $V_G$, lower polygenicity,
-        and therefore higher recombination rates between trait-affecting alleles --
-        we therefore expect this deviation to be exacerbated with higher mutation
-        rates (all else being equal)
-\end{itemize}
-
-\subsubsection*{Reduction of introgressed ancestry surrounding an introgressed trait-affecting allele}
+\subsubsection*{Introgressed ancestry is reduced around introduced trait-affecting alleles}
 
 \begin{itemize}
     \item Because introgressed trait-affecting alleles are selected against as the
@@ -486,6 +510,7 @@ Paragraph on the following (point to appendix and supplement):
         \textbf{}
         \aprcomment{Linked allele frequency should always be minor, and labeled
         introgressed ancestry frequency}
+        \aprcomment{Combine with next figure}
     }
     \label{fig:linkage-pred}
 \end{figure}
@@ -517,9 +542,12 @@ Paragraph on the following (point to appendix and supplement):
     \includegraphics{../figures/linkage_simulation.pdf}
     \caption{
         \textbf{}
+        \aprcomment{Combine with previous figure}
     }
     \label{fig:linkage-sim}
 \end{figure}
+
+\subsection*{Introgressed ancestry deserts are shared under reciprocal introgression}
 
 \begin{figure}[t!]
     \centering
@@ -585,9 +613,9 @@ Paragraph on the following (point to appendix and supplement):
 \bibliographystyle{genetics}
 \bibliography{manuscript}
 
-\section{Appendix}
+\appendix
 
-\subsection{Additive genetic variance after admixture}
+\section{Additive genetic variance after admixture}\label{sec:VG-admixture}
 
 \aprcomment{Start with ``Here we show that\dots''}
 
@@ -635,9 +663,9 @@ Then
     \label{fig:VG_dynamics}
 \end{figure}
 
-\subsection{Dynamics of introgressed alleles}
+\section{Dynamics of introgressed alleles}
 
-\subsection{Reciprocal depletion of functional variation}
+\section{Reciprocal depletion of functional variation}
 
 While incompatibilities require two or more loci (Morgan, 1942), introgression
 with stabilizing selection can create the appearance of a single-locus
