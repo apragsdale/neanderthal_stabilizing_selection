@@ -401,7 +401,7 @@ as \cite{wei2023lingering}, challenging.}
     \label{fig:human-to-neand}
 \end{figure}
 
-\subsection*{Expected genetic variance with linkage}
+\subsection*{The effects of linkage}
 
 In the preceding sections, we find that approximating the dynamics of
 trait-affecting alleles using an underdominance model
@@ -443,65 +443,85 @@ polygenicity, with higher mutation rates causing higher number of segregating
 alleles, but also the mean recombination rate between those alleles, as they
 will be more or less densely distributed in the genome. The distribution of
 effect sizes plays an important role, as seen by the opposite trends in $V_G$
-relative to unlinked predictions, which are most apparent with high mutation
-rates. There appear to be complex dynamics involving the Bulmer Effect
+relative to unlinked predictions (Figure~X vs. Figure~Y), which are most
+apparent with high mutation rates, and thus high polygenicity. In such cases,
+there appear to be complex dynamics involving the Bulmer Effect
 \citep{bulmer1971effect} and interference between selected alleles
-\citep{hill1966effect}, which warrants careful investigation.
+\citep{hill1966effect}.
 
-\subsubsection*{Introgressed ancestry is reduced around introduced trait-affecting alleles}
+\subsubsection*{Introgressed ancestry is reduced around introduced
+trait-affecting alleles}
 
-\begin{itemize}
-    \item Because introgressed trait-affecting alleles are selected against as the
-        minor allele, linkage will also remove introgressed ancestry segments in the
-        regions surrounding the selected alleles
-    \item The expected reduction in introgressed ancestry proportions surrounding
-        functional alleles will depend on the effect size of the trait-affecting allele
-        and the probability of recombination surrounding that site
-    \item We can consider first a deterministic model of the dynamics of introgressed
-        allele frequencies at and around an introgressed functional allele -- this
-        model considers a single trait-affecting locus, ignoring any effects of
-        interference between selected alleles
-        \begin{itemize}
-            \item Consider a site with fixed differences between the two populations
-                (the derived allele is fixed in one, lost in the other)
-            \item At the functional site itself, with admixture proportion $f$ from the
-                minor parental ancestry, the initial frequency of the derived allele
-                is $p_0=f$ or $p_0 = 1-f$, if the derived allele was fixed in the 
-                major parental ancestry population
-            \item In one generation, the expected allele frequency at the selected locus
-                is \[p_{t+1} \approx p_t - s p_t(1-p_t)(1-2p_t),\] where $s=a^2/2V_S$
-            \item As discussed earlier, if $p_0<1/2$, $p_t\rightarrow0$, and if $p_0>1/2$,
-                $p_t\rightarrow1$ as $t\rightarrow\infty$
-            \item Consider a neutral locus separated from the selected locus by
-                recombination probability $r$. Initially, the expected frequency
-                of introgressed ancestry at that locus is $q_0=f$
-            \item The linked ancestry frequency will change due to selection acting on
-                the trait-affecting locus, depending on the strength of selection
-                at that locus and the level of linkage disequilibrium between
-                the two loci
-            \item $D=Cov(p,q)$ is the standard covariance measure of LD between loci,
-                and $q$ is expected to change as \[q_{t+1} \approx q_t - s D_t(1-2p_t)\]
-            \item $D$ also changes over time, due to both selection and recombination,
-                so that \[D_{t+1} \approx D_t - r D_t - s D_t (1-2p_t)^2\]
-            \item Initially, $D_0 = \pm f(1-f)$, with $D$ being positive if $p_0=f$
-                and negative if $p_0=1-f$
-            \item Together, this forms a nonlinear system of equations for the
-                deterministic change in allele frequencies at the two loci (one
-                selected, one neutral) and LD between them -- note that this is
-                deterministic in the infinite population size limit
-        \end{itemize}
-    \item Using this model, we can predict how allele frequencies and LD are expected
-        to change over time after admixture, for a given effect size $a$ and 
-        recombination rate $r$ (Figure~\ref{fig:linkage-pred}A,B)
-    \item As expected, lower effect sizes result in a slower reduction in introgressed
-        ancestry frequency, while higher recombination rates more quickly decouple
-        the linked ancestry from the selected allele
-    \item Thus, the expected reduction in introgressed ancestry is largest for
-        larger effect sizes (Figure~\ref{fig:linkage-pred}C), and LD between the
-        selected and linked neutral alleles is largest for neutral sites closest
-        to the selected allele (Figure~\ref{fig:linkage-pred}D)
-\end{itemize}
+Because introgressed trait-affecting alleles are selection against as the minor
+allele, introgressed ancestry segments in the regions surrounding the selected
+alleles will also be removed due to linkage. The expected reduction in such
+introgressed ancestry will depend on the effect size of the trait-affecting
+allele and the probability of recombination surrounding that locus. We first
+consider a deterministic model of the dynamics of introgressed allele and
+linked ancestry frequencies with variable recombination between them. This
+simple model ignores the effects of drift and of interference between multiple
+selected alleles.
 
+We model a trait-affecting site with a fixed difference between the two
+parental populations, in which the derived allele may be fixed in either
+population. At the functional site, with admixture proportion $f$ from the
+minor parental source, the initial frequency of the derived allele is either
+$p_0=f$ or $p_0=1-f$. Over one generation, the expected allele frequency at the
+selected locus is, to leading order in $s$,
+\begin{align}\label{eq:system-p}
+    p_{t+1} & = p_t - s p_t(1-p_t)(1-2p_t),
+\end{align}
+with
+\(s=a^2/2V_S\). As discussed above, if \(p_0<1/2\), \(p_t\rightarrow0\), and if
+\(p_0>1/2\), \(p_t\rightarrow1\) as \(t\rightarrow\infty\).
+
+We consider a neutral locus separated from the selected locus by recombination
+probability $r$. Initially, the expected frequency of linked introgressed
+ancestry is \(q_0=f\), which changes over time due to linked selection on the
+trait-affecting allele. Letting \(D=Cov(p,q)\) be the standard covariance
+measure of LD between the two loci, $q$ is expected to change as
+\begin{align}\label{eq:system-q}
+    q_{t+1} & = q_t - s D_t(1-2p_t).
+\end{align}
+Initially, \(D_0=\pm f(1-f)\), with \(D\) being
+positive if \(p_0=f\) and negative if \(p_0=1-f\). LD between the loci changes
+deterministically over time, due to both selection and recombination, so that
+\begin{align}\label{eq:system-D}
+    D_{t+1} = D_t - r D_t - s D_t (1-2p_t)^2.
+\end{align}
+Together, this forms a
+simple nonlinear system of equations for the deterministic change in allele
+frequencies at the two loci and LD between them.
+
+Using this model, we predict the changes in introgressed allele frequences and
+LD after admixture for given effect size $a$ and recombination rate $r$
+(Figure~\ref{fig:linkage-pred}). As expected, smaller effect sizes result in a
+slower decay in introgressed ancestry frequency at both selected and linked
+loci, and larger recombination rates more quickly decouple the linked ancestry
+from the selected allele dynamics. Thus, the expected reduction in introgressed
+ancestry is largest for larger effect sizes (Figure~\ref{fig:linkage-pred}X),
+and LD between the selected and linked neutral alleles is largest for neutral
+sites closest to the selected allele (Figure~\ref{fig:linkage-pred}Y).
+
+We assessed the accuracy of the deterministic two-locus model using
+individual-based forward-in-time simulations \citep{thornton2019polygenic}
+under a simple demographic model (Figure~\ref{fig:toy-admixture}A), with
+introgression fraction \(f=0.05\). We simulated a single chromosome of length 1
+Morgan, with all mutations having effect sizes \(\pm a\) (\(a=0.02\) or
+\(0.05\)), and we varied the total per-chromosome mutation rate (\(\mu=0.001\),
+\(0.0025\) and \(0.01\)). For each fixed-difference mutation in the parental
+populations, we determined the average introgressed ancestry surrounding such
+loci (Methods).
+
+The deterministic model (Equations~\ref{eq:system-p}--\ref{eq:system-D})
+provides a very good approximation when mutation rates are small. As the
+mutation rate increases in these simulations, polygenicity also increases so
+that trait-affecting alleles are more densely distributed along the chromosome.
+Deviations from the deterministic model are due to multiple selected alleles
+affecting local introgressed ancestry. For the highest mutation rate shown
+here, there are expected to be multiple other trait-affecting alleles within a
+1 cM window around any focal SNP, which interact with each other and also
+affect local ancestry proportions.
 
 \begin{figure}[t!]
     \centering
@@ -515,27 +535,6 @@ rates. There appear to be complex dynamics involving the Bulmer Effect
     \label{fig:linkage-pred}
 \end{figure}
 
-\begin{itemize}
-    \item To explore the accuracy of this two-locus model, we compared to
-        simulations using the demographic model shown in
-        Figure~\ref{fig:toy-admixture}A with introgression fraction $f=0.05$.
-        We simulated a single 1 Morgan
-        chromosome, with all mutations having effect sizes $\pm a$ ($a=0.02$ or
-        $0.05$, with equal probability of being trait-increasing or decreasing)
-        and varying the total mutation rate ($\mu=0.001$, $0.0025$, and $0.01$)
-    \item For each mutation that was fixed in one population and absent in the
-        other (either fixed in the minor or major ancestry population), we
-        determined the average introgressed ancestry surrounding those introgressed
-        alleles (Figure~\ref{fig:linkage-sim})
-    \item The deterministic model provides a very good approximation for linked
-        introgressed ancestry when the mutation rate is small
-    \item As the mutation rate increases, polygenicity increases so that
-        trait-affecting alleles are more densely distributed along the chromosome --
-        deviations from the deterministic model are due to interference between
-        tightly linked trait-affecting alleles. For the highest mutation rate shown
-        here, there will be many trait-affecting alleles within the 1 cM window
-        around any focal SNP
-\end{itemize}
 
 \begin{figure}[t!]
     \centering
@@ -547,7 +546,33 @@ rates. There appear to be complex dynamics involving the Bulmer Effect
     \label{fig:linkage-sim}
 \end{figure}
 
-\subsection*{Introgressed ancestry deserts are shared under reciprocal introgression}
+\subsection*{Introgressed ancestry deserts are shared under stabilizing
+selection and reciprocal introgression}
+
+As shown in the previous section, introgressed ancestry is reduced around loci
+with trait-affecting alleles regardless of the parental population the derived
+allele is present in. We should therefore expect to observe reductions in
+introgressed ancestry at the same trait-affecting loci after gene flow in
+either direction. If introgression occurs in both directions, regions of
+reduced introgressed ancestry will coincide around such loci, and introgression
+``deserts'' that appear due to selection against trait-affecting alleles will
+tend to be shared.
+
+To demonstrate this effect, we performed chromosome-scale simulations under a
+model of human-Neanderthal reciprocal introgression
+\citep[Figure~\ref{fig:neand-to-human}A,][]{harris2023diverse}. Mutations
+affecting a trait under stabilizing selection in each population could arise in
+100 kb ``functional'' regions, spaced 1 Mb apart (Methods). Sampling
+individuals from both the human and Neanderthal lineages, we observed the
+average introgressed ancestry proportions were lowest within functional regions
+and dipped in the surrounding regions (Figure~\ref{fig:deserts}A). This
+corresponded to an increased proportion of ancestry deserts (defined as
+    contiguous 50kb regions with no observed introgressed ancestry in the
+sample) within and immediately surrounding the functional regions. Functional
+regions also displayed an enrichment of \emph{shared} ancestry deserts, with
+the probability of observing ancestry deserts (either within a population or
+shared) decaying to background levels as the distance from the functional
+region increases.
 
 \begin{figure}[t!]
     \centering
