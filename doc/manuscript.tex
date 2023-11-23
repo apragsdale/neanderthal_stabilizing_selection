@@ -14,7 +14,7 @@
 
 \DeclareMathOperator{\Var}{Var}
 
-\newcommand{\aprcomment}[1]{{\textcolor{blue}{Comment: #1}}}
+\newcommand{\aprcomment}[1]{{\textcolor{blue}{APR: #1}}}
 \newcommand{\E}{\mathbb{E}}
 
 \title{Archaic introgression and the distribution
@@ -27,7 +27,7 @@ of shared functional variation under stabilizing selection}
 
 
 \begin{abstract}
-    .
+    
 \end{abstract}
 
 \onehalfspacing
@@ -586,29 +586,52 @@ region increases.
 \section*{Discussion}
 
 Many phenotypic traits are under stabilizing selection
-\citep{hodgins2015gene,sanjak2018evidence,sella2019thinking}. This motivates
-stabilizing selection around a shared optimum as an appropriate null models for
-the dynamics of allele frequencies affecting polygenic traits
-\citep{yair2022population}. Stabilizing selection results in distinct dynamics
-for trait-affecting alleles, characterized by symmetric underdominance
+\citep{hodgins2015gene,sanjak2018evidence,sella2019thinking}. This has
+motivated using stabilizing selection around a shared optimum as a null model
+for the dynamics of alleles affecting polygenic traits
+\citep{yair2022population}. Stabilizing selection has a distinct effect on
+trait-affecting alleles, characterized by symmetric underdominance
 \citep{robertson1956effect,keightley1988quantitative}, that is, selection
-against the minor allele. Because admixture and introgression events are common
-in natural populations, it will be important to understand the effects of gene
-flow on the architecture of complex traits.  \aprcomment{or\dots``studies of
-complex traits in admixed populations rely on this understanding, or
-something''}
+against the minor allele. There has been some previous work on how migration
+shapes the genetic variance of a trait under stabilizing selection
+\aprcomment{[cite]}, but most studies consider single populations, often at
+steady state. Admixture and introgression events are common in natural
+populations, so understanding their effects on the architecture of complex
+traits is needed.
+
+Here, we have shown that multi-population, non-equilibrium approaches for the
+site frequency spectrum with underdominance can be used to model the additive
+genetic variance of a trait under stabilizing selection. While this approach
+ignores biologically relevant aspects such as linkage between sites and
+pleiotropy, it can still provide important insights into the dynamics of trait
+architectures. By modeling allelic contributions to the trait as additive, it
+allows for the decomposition of contributions from alleles of different
+origins, either by source population or mutation time. It may therefore be
+useful for understanding the expected contributions of introgressed variants to
+complex traits, for example from Neanderthal-introgressed mutations in humans
+\citep{wei2023lingering}. In the limited scenarios explored here, we see that
+the expected contributions of introgressed variants to heritability are
+complicated even in the purely additive case, depending on the distribution of
+effect sizes, demographic history, and the time since admixture
+(Figures~\ref{fig:neand-to-human}, \ref{fig:human-to-neand}).
+
+\aprcomment{While we have focused on the relatively simple scenario of two
+diverged populations recently exchanging migrants, SFS methods presented here
+can incorporate continuous migration, more than two populations, or changes in
+the trait optimum. We leave these for future work\dots}
 
 After admixture between diverged populations, the additive genetic variance of
 a trait rapidly increases. The genetic variance after admixture depends on both
 the existing genetic variances within the parental population and their
 divergence at trait-affecting loci, measured by $F_2$
-(Equation~\ref{eq:VG-admixture}). $V_G$ is then expected to fairly quickly
-decay to background levels. During this process, introgressed and pre-existing
-trait-affecting alleles are replaced by new mutations, turning over the genetic
-architecture of the trait (Figure\ref{fig:toy-admixture}). Selection occurs
-against the minor alleles at trait-affecting loci, so that introgressed alleles
-from the minor parental ancestry, whether derived or reintroduced ancestral
-alleles, are selected against (Figure~\ref{fig:linkage-pred}).
+(Equation~\ref{eq:VG-admixture}). $V_G$ is then expected to decay fairly
+quickly to background levels. During this process, introgressed and
+pre-existing trait-affecting alleles are replaced by new mutations, turning
+over the genetic architecture of the trait (Figure\ref{fig:toy-admixture}).
+Selection occurs against the minor alleles at trait-affecting loci, so that
+introgressed alleles from the minor parental ancestry, whether derived or
+reintroduced ancestral alleles, are selected against
+(Figure~\ref{fig:linkage-pred}).
 
 Selection against introgressed alleles will also remove linked introgressed
 ancestry in the surrounding regions. Thus, introgressed ancestry deserts are
@@ -628,43 +651,47 @@ a given selected locus will decrease in frequency in one introgression scenario
 and increase the other. This may explain the replacement of MT and Y chromosome
 DNA in Neanderthals by human haplotypes after early human-to-Neanderthal
 introgression \citep{posth2017deeply,petr2020evolutionary}.
+%However, this is
+%not the general pattern observed when comparing introgressed ancestry in the
+%autosomal genomes of humans and Neanderthals \citep{harris2023diverse}.
 
-\citet{muller1942isolating} originally hypothesized that hybrid
-incompatibilities should not often form within a single locus, but instead the
-two or more loci involved will most often be found at distant or unlinked loci
-in genome. Theory predicts that hybrid incompatibilities are resolved via
-selection against the minor parental ancestry [cite]. Depending on the
-direction of introgression, different incompatibilities alleles will be
-selected against and ancestry deserts will form around those different loci.
-While such a model predicts selection against introgressed ancestry, similar to
-the stabilizing selection model, an important distinction is that deserts are
-not expected to overlap with bidirectional gene flow.
+The classical model of Bateson-Dobzhansky-Muller incompatibilities (BDMIs)
+\citep{bateson1909heredity,dobzhansky1936studies,muller1942isolating} explains
+the accumulation of reproductive isolation through negative epistatic
+interactions that are exposed in hybrids. \citet{muller1942isolating}
+hypothesized that such BDMIs should most often form between distant or unlinked
+loci, instead of within single or tightly linked loci. Because theory predicts
+that hybrid incompatibilities are resolved via selection against the minor
+parental ancestry \citep{moran2021genomic}, ancestry deserts should form in
+different genomic regions as the different incompatibility alleles are selected
+against, depending on the direction of introgression. While such a model
+predicts selection against introgressed ancestry, similar to that of
+stabilizing selection, an important distinction is that deserts due to
+selection against incompatibility loci are not expected to overlap under
+bidirectional gene flow. While there is little empirical data on the
+distribution of BDMIs, studies point to interacting BDMI alleles being unlinked
+\citep[][e.g.,]{presgraves2003fine} and an asymmetry in the alleles under
+selection in different introgression scenarios
+\citep{maheshwari2011genetics,moran2021genomic}.
 
-\aprcomment{any data about distributions of incompatibility loci in the
-genome?}
-
-\aprcomment{Second-to-last paragraph}
-Turning to observations from human and Neanderthal genomes
-\citep{harris2023diverse}
-
-\aprcomment{last paragraph}
-\begin{itemize}
-    \item Selection in structured populations with ongoing migration or
-        meta-populations -- SFS approach can handle this -- prospects for the
-        future
-\end{itemize}
-\aprcomment{end on a comment about the usefulness of the SFS approach and the
-promise for future studies of dynamics of the architecture of complex traits
-with non-trivial demographic scenarios -- possible that this should be earlier,
-and we can include caveats there. Maybe second paragraph of discussion.}
-
-
-\aprcomment{don't end on this, or might not need to include it -- caveats can
-come earlier?}
-\begin{itemize}
-    \item Some conjectures about hybrid zones - single-locus ``incompatibilities''
-    \item Pleiotropy\dots!!!
-\end{itemize}
+Finally, turning to the distribution of introgressed ancestry deserts in humans
+and Neanderthals, \citet{harris2023diverse} find that regions of depleted
+Neanderthal ancestry in humans overlap more than would be expected by chance
+with regions lacking human-introgressed alleles in the Altai Neanderthal.
+Human-introgressed ancestry in the Neanderthal genome is also depleted in
+functional regions, as observed in humans \citep{sankararaman2014genomic}.
+\citet{harris2023diverse} propose that epistatic interactions between
+introgressed alleles and the recipient backgrounds could drive these patterns,
+which they interpret as evidence for the inital process of speciation between
+humans and Neanderthals. However, this observation of shared ancestry deserts
+does not match expectations under a classic model of BDMIs, as argued above.
+Instead, at least some of the pattern may be due to stabilizing selection
+acting on complex traits, such as gene regulation.  Importantly, such
+overlapping ancestry deserts are expected even when a trait is under
+stabilizing selection for the same phenotypic optimal value. The selective
+causes of ancestry deserts in both humans and Neanderthals remain unknown.
+Stabilizing selection will prove a useful null model for testing scenarios of
+epistasis, incompatibilities and adaptive introgression.
 
 \section*{Methods}
 
