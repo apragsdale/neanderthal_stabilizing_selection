@@ -24,15 +24,16 @@ N2 = 1e3
 T1 = 500000 / 25
 T2 = 100000 / 25
 f = 0.05
-b = demes.Builder(time_units="years", generation_time=25)
+#b = demes.Builder(time_units="years", generation_time=25)
+b = demes.Builder(time_units="generations")
 b.add_deme("Deme1", epochs=[dict(end_time=0, start_size=N1)])
 b.add_deme(
     "Deme2",
-    start_time=(T1 + T2) * 25,
+    start_time=(T1 + T2),
     ancestors=["Deme1"],
     epochs=[dict(end_time=0, start_size=N2)],
 )
-b.add_pulse(sources=["Deme2"], dest="Deme1", time=T2 * 25, proportions=[f])
+b.add_pulse(sources=["Deme2"], dest="Deme1", time=T2, proportions=[f])
 g1 = b.resolve()
 
 b.data["pulses"][0]["sources"] = ["Deme1"]
@@ -250,7 +251,7 @@ if __name__ == "__main__":
     a_list = np.logspace(-3, np.log10(2 * SD))
 
     grid = (2, 8)
-    fig = plt.figure(2, figsize=(6.5, 3.5))
+    fig = plt.figure(3, figsize=(6.5, 3.5))
     fig.clf()
 
     ## from small to big
@@ -259,6 +260,8 @@ if __name__ == "__main__":
     # plot model
     ax1 = plt.subplot2grid(grid, (0, 0), colspan=2)
     demesdraw.tubes(g1, ax=ax1)
+    ax1.set_yticks(np.arange(0, 32000, 4000))
+    ax1.set_ylabel("Time ago (generations)")
 
     # plot simulation averages vs moments prediction
     ax2 = plt.subplot2grid(grid, (0, 2), colspan=3)
@@ -269,15 +272,17 @@ if __name__ == "__main__":
         theta=theta,
         admix_dest=admix_dest,
     )
-    t_bp = 2 * Ne * (t - t[-1]) / 1000
+    t_bp = 2 * Ne * (t - t[-1])
     # get simulation data
     VGs, VG_by_state = load_sim_data(admix_dest)
-    t_sim = -np.arange(len(VGs[0]))[::-1] / 1000
-    ax2.plot(25 * t_bp, VG2, ":", lw=2, c=colors[1], label=None)
-    ax2.plot(25 * t_sim, VGs[1], c=colors[1], lw=0.5, label=None)
-    ax2.plot(25 * t_bp, VG1, ":", lw=2, c=colors[0], label=None)
-    ax2.plot(25 * t_sim, VGs[0], c=colors[0], lw=0.5, label=None)
-    ax2.set_xlim(-ax1.get_ylim()[1] / 1000, 10)
+    t_sim = -np.arange(len(VGs[0]))[::-1]
+    ax2.plot(t_bp, VG2, ":", lw=2, c=colors[1], label=None)
+    ax2.plot(t_sim, VGs[1], c=colors[1], lw=0.5, label=None)
+    ax2.plot(t_bp, VG1, ":", lw=2, c=colors[0], label=None)
+    ax2.plot(t_sim, VGs[0], c=colors[0], lw=0.5, label=None)
+    ax2.set_xlim(-ax1.get_ylim()[1], 400)
+    ax2.set_xticks([-24000, -16000, -8000, 0])
+    ax2.set_xticklabels([24000, 16000, 8000, 0])
 
     # for the legend
     xlim = ax2.get_xlim()
@@ -287,30 +292,32 @@ if __name__ == "__main__":
     ax2.set_xlim(xlim)
     ax2.set_ylim(ylim)
     ax2.legend(fontsize=6, frameon=False)
-    ax2.set_ylabel("$V_{A}$")
-    ax2.text(-400, 0.1, "Deme 1", fontsize=6, color=colors[0], va="center", ha="center")
+    ax2.set_ylabel("$V_G$")
+    ax2.text(-16000, 0.1, "Deme 1", fontsize=6, color=colors[0], va="center", ha="center")
     ax2.text(
-        -250, 0.08, "Deme 2", fontsize=6, color=colors[1], va="center", ha="center"
+        -10000, 0.08, "Deme 2", fontsize=6, color=colors[1], va="center", ha="center"
     )
-    # ax2.set_xlabel("Time ago (ka)")
+    #ax2.set_xlabel("Time ago (gens.)")
     ax2.set_title("Total genetic variance")
 
     ax2b = plt.subplot2grid(grid, (0, 5), colspan=3)
     with open("data/VG_traj.part.SD_0.05.pkl", "rb") as fin:
         data = pickle.load(fin)
-    ax2b.plot(data[1]["t"], data[1]["tot"], label="Total")
-    ax2b.plot(data[1]["t"], data[1]["seg"], label="Segregating")
-    ax2b.plot(data[1]["t"], data[1]["lost"], label="Introgressed (der.)")
-    ax2b.plot(data[1]["t"], data[1]["fixed"], label="Introgressed (anc.)")
-    ax2b.plot(data[1]["t"], data[1]["new"], label="New mutations")
-    # ax2b.set_xlabel("Time since admixture (ka)")
-    # ax2b.legend(fontsize=6)
+    ax2b.plot(data[1]["t"] / 25 * 1000, data[1]["tot"], label="Total")
+    ax2b.plot(data[1]["t"] / 25 * 1000, data[1]["seg"], label="Segregating")
+    ax2b.plot(data[1]["t"] / 25 * 1000, data[1]["lost"], label="Introgressed (der.)")
+    ax2b.plot(data[1]["t"] / 25 * 1000, data[1]["fixed"], label="Introgressed (anc.)")
+    ax2b.plot(data[1]["t"] / 25 * 1000, data[1]["new"], label="New mutations")
+    #ax2b.set_xlabel("Time since admixture (gens.)")
     ax2b.set_title("Segregating, introgressed, and new variants")
+    ax2b.set_ylabel("$V_G$")
 
     ## big to small
     admix_dest = 2
     ax3 = plt.subplot2grid(grid, (1, 0), colspan=2)
     demesdraw.tubes(g2, ax=ax3)
+    ax3.set_yticks(np.arange(0, 32000, 4000))
+    ax3.set_ylabel("Time ago (generations)")
 
     ax4 = plt.subplot2grid(grid, (1, 2), colspan=3)
     # get moments predictions
@@ -320,30 +327,41 @@ if __name__ == "__main__":
         theta=theta,
         admix_dest=admix_dest,
     )
-    t_bp = 2 * Ne * (t - t[-1]) / 1000
+    t_bp = 2 * Ne * (t - t[-1])
     # get simulation data
     VGs, VG_by_state = load_sim_data(admix_dest)
-    t_sim = -np.arange(len(VGs[0]))[::-1] / 1000
-    ax4.plot(25 * t_bp, VG1, ":", lw=2, c=colors[0])
-    ax4.plot(25 * t_sim, VGs[0], c=colors[0], lw=0.5)
-    ax4.plot(25 * t_bp, VG2, ":", lw=2, c=colors[1])
-    ax4.plot(25 * t_sim, VGs[1], c=colors[1], lw=0.5)
-    ax4.set_xlim(-ax1.get_ylim()[1] / 1000, 10)
-    ax4.set_ylabel("$V_{A}$")
-    ax4.set_xlabel("Time ago (ka)")
+    t_sim = -np.arange(len(VGs[0]))[::-1]
+    ax4.plot(t_bp, VG2, ":", lw=2, c=colors[1])
+    ax4.plot(t_sim, VGs[1], c=colors[1], lw=0.5)
+    ax4.plot(t_bp, VG1, ":", lw=2, c=colors[0])
+    ax4.plot(t_sim, VGs[0], c=colors[0], lw=0.5)
+    ax4.set_xlim(-ax1.get_ylim()[1], 10)
+    ax4.set_ylabel("$V_G$")
+    ax4.set_xlabel("Time ago (gens.)")
+    ax4.set_xticks([-24000, -16000, -8000, 0])
+    ax4.set_xticklabels([24000, 16000, 8000, 0])
+    ax4.set_ylim(ax2.get_ylim())
 
     ax4b = plt.subplot2grid(grid, (1, 5), colspan=3)
     with open("data/VG_traj.part.SD_0.05.pkl", "rb") as fin:
         data = pickle.load(fin)
-    ax4b.plot(data[2]["t"], data[2]["tot"], label="Total")
-    ax4b.plot(data[2]["t"], data[2]["seg"], label="Seg.")
-    ax4b.plot(data[2]["t"], data[2]["lost"], label="Intro. (der.)")
-    ax4b.plot(data[2]["t"], data[2]["fixed"], label="Intro. (anc.)")
-    ax4b.plot(data[2]["t"], data[2]["new"], label="New mut.")
-    ax4b.set_xlabel("Time since admixture (ka)")
-    ax4b.legend(handlelength=1, loc=7)
+    ax4b.plot(data[2]["t"] / 25 * 1000, data[2]["tot"], label="Total")
+    ax4b.plot(data[2]["t"] / 25 * 1000, data[2]["seg"], label="Seg.")
+    ax4b.plot(data[2]["t"] / 25 * 1000, data[2]["lost"], label="Intro. (der.)")
+    ax4b.plot(data[2]["t"] / 25 * 1000, data[2]["fixed"], label="Intro. (anc.)")
+    ax4b.plot(data[2]["t"] / 25 * 1000, data[2]["new"], label="New mut.")
+    ax4b.set_xlabel("Time since admixture (gens.)")
+    ax4b.legend(handlelength=1, loc=1, ncols=2, fontsize=5, frameon=False)
+    ax4b.set_ylabel("$V_G$")
+    ax4b.set_ylim(top=ax2b.get_ylim()[1])
 
+    fig.text(0.01, 0.97, "A", fontsize=8, va="center", ha="center")
+    fig.text(0.28, 0.97, "C", fontsize=8, va="center", ha="center")
+    fig.text(0.63, 0.97, "E", fontsize=8, va="center", ha="center")
+    fig.text(0.01, 0.49, "B", fontsize=8, va="center", ha="center")
+    fig.text(0.28, 0.49, "D", fontsize=8, va="center", ha="center")
+    fig.text(0.63, 0.49, "F", fontsize=8, va="center", ha="center")
     plt.tight_layout()
-    plt.subplots_adjust(wspace=1.5, hspace=0.3, top=0.95, bottom=0.1, left=0.09, right=0.97)
+    plt.subplots_adjust(wspace=3, hspace=0.3, top=0.95, bottom=0.1, left=0.09, right=0.97)
     plt.savefig("reciprocal_admixture.pdf")
     # plt.show()
