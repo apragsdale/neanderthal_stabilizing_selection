@@ -13,7 +13,6 @@ matplotlib.rc("axes", labelsize=7)
 matplotlib.rc("axes", titlesize=7)
 matplotlib.rc("legend", fontsize=6)
 
-
 colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
 
 
@@ -131,7 +130,7 @@ def plot_stabilizing_selection_diagram(ax, VS=1, VG=0.1, optimum=0):
     ax.text(0.605, 0.53, "$V_S$", va="center", ha="center", color="k", fontsize=6)
     ax.set_ylim(bottom=0)
     ax.set_xlim([-2, 2])
-    ax.set_xlabel("Phenotype ($z$)")
+    ax.set_xlabel("Phenotype")
     ax.set_xticks([0])
     ax.set_xticklabels(["Optimum"])
     ax.set_yticks([])
@@ -191,8 +190,8 @@ def plot_shoc(ax, VS=1):
 
     data = pickle.load(open("../unlinked/unlinked_VGs_array.pkl", "rb"))
     x = np.logspace(-5, 0, 101)
-    ax.plot(x ** 2 * Ne, 4 * Ne * mu * x ** 2, ":", color="gray", lw=0.5, zorder=0)
-    ax.plot(x ** 2 * Ne, 4 * mu * VS * np.ones(len(x)), ":", color="gray", lw=0.5, zorder=0)
+    ax.plot(x ** 2 * Ne, 4 * Ne * mu * x ** 2, ":", color="gray", lw=0.75, zorder=0)
+    ax.plot(x ** 2 * Ne, 4 * mu * VS * np.ones(len(x)), ":", color="gray", lw=0.75, zorder=0)
     SHOC = 4 * mu * VS / (1 + VS / Ne / x ** 2)
     ax.plot(
         x ** 2 * Ne,
@@ -206,22 +205,22 @@ def plot_shoc(ax, VS=1):
     ax.scatter(
         SDs ** 2 * Ne,
         VGs,
-        s=16,
-        marker="+",
-        color=colors[0],
-        linewidths=0.75,
+        s=14,
+        marker="o",
+        edgecolors=colors[0],
+        facecolors="none",
+        linewidths=1,
         label="moments",
-        zorder=3,
+        zorder=2,
     )
     ax.scatter(
         data["SD"] ** 2 * Ne,
         data["VG"],
         color=colors[1],
-        s=10,
-        marker="x",
-        linewidths=0.75,
+        s=3,
+        marker="o",
         label="Simulations",
-        zorder=2,
+        zorder=3,
     )
     ax.set_yscale("log")
     ax.set_xscale("log")
@@ -231,7 +230,7 @@ def plot_shoc(ax, VS=1):
     ax.set_ylabel("$V_G$")
     ax.legend(handlelength=1.5, frameon=False, loc="center right")
     ax.text(5e-4, 5e-5, "$4N_e\\mu V_M$", fontsize=6, color="k", rotation=45)
-    ax.text(5e-4, 0.018, "$4\\mu V_S$", fontsize=6, color="k")
+    ax.text(3e-2, 0.047, "$4\\mu V_S$", fontsize=6, color="k")
 
 
 def plot_trajectories(ax, axb, VS=1):

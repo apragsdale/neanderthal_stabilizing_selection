@@ -20,8 +20,11 @@
 \newcommand{\moments}{\texttt{moments}\xspace}
 \newcommand{\fwdpy}{\texttt{fwdpy11}\xspace}
 
-\title{Supporting Information}
-\author{APR}
+\title{Supporting Information for\\
+``Archaic introgression and the distribution
+of shared variation under stabilizing selection''}
+\author[]{Aaron P. Ragsdale}
+\affil[]{Department of Integrative Biology, University of Wisconsin--Madison, WI, USA}
 \date{\today}
 
 \begin{document}
@@ -92,21 +95,6 @@
 \end{figure}
 
 
-\begin{figure}[t!]
-    \centering
-    \includegraphics{../figures/human-neand-VG.pdf}
-    \caption{
-        Genetic variance of a trait under stabilizing selection in a model with
-        human (blue) and Neanderthal (orange) demography. We consider two
-        mutational variances ($\sigma_M=0.05$ and $0.01$). The demographic model
-        (Figure~\ref{fig:human-neand-h2}A) includes $5\%$ admixture from humans
-        to Neanderthals 250 ka, and $2\%$ admixture from Neanderthals to humans
-        50 ka.
-    }
-    \label{fig:human-neand-VG}
-\end{figure}
-
-
 \begin{figure}[ht!]
     \centering
     \includegraphics{../figures/model_comparison.SD_0.01.mu_0.001_0.025.pdf}
@@ -133,6 +121,91 @@
         widespread interference between alleles.
     }
     \label{fig:supp-high-VM}
+\end{figure}
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics{../figures/human-neand-VG.pdf}
+    \caption{
+        Genetic variance of a trait under stabilizing selection in a model with
+        human (blue) and Neanderthal (orange) demography. We consider two
+        mutational variances ($\sigma_M=0.05$ and $0.01$). The demographic model
+        (Figure~\ref{fig:human-neand-h2}A) includes $5\%$ admixture from humans
+        to Neanderthals 250 ka, and $2\%$ admixture from Neanderthals to humans
+        50 ka.
+    }
+    \label{fig:human-neand-VG}
+\end{figure}
+
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics{../figures/introgression_deserts.SD_0.05.pdf}
+    \caption{
+        Introgressed ancestry and probability of introgression deserts in and
+        around functional regions, from simulations with high mutational variance.
+        The demographic model is shown in Figure~\ref{fig:human-neand-h2}A.
+    }
+    \label{fig:deserts-high-VM}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics{../figures/introgression_deserts.SD_0.01.pdf}
+    \caption{
+        Introgressed ancestry and probability of introgression deserts in and
+        around functional regions, from simulations with moderate mutational variance.
+        The demographic model is shown in Figure~\ref{fig:human-neand-h2}A.
+    }
+    \label{fig:deserts-med-VM}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics{../figures/introgression_deserts.SD_0.005.pdf}
+    \caption{
+        Introgressed ancestry and probability of introgression deserts in and
+        around functional regions, from simulations with low mutational variance.
+        The demographic model is shown in Figure~\ref{fig:human-neand-h2}A.
+    }
+    \label{fig:deserts-low-VM}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics{../figures/introgression_deserts.directional.mean_-0.0002.shape_0.5.pdf}
+    \caption{
+        Introgressed ancestry and probability of introgression deserts in and
+        around functional regions, from simulations with directional selection.
+        Deleterious mutations were drawn from a gamma distribution with mean
+        $-0.0002$ and shape $0.05$.
+        The demographic model is shown in Figure~\ref{fig:human-neand-h2}A.
+    }
+    \label{fig:deserts-directional-A}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics{../figures/introgression_deserts.directional.mean_-0.001.shape_0.5.pdf}
+    \caption{
+        Introgressed ancestry and probability of introgression deserts in and
+        around functional regions, from simulations with directional selection.
+        Deleterious mutations were drawn from a gamma distribution with mean
+        $-0.001$ and shape $0.05$.
+        The demographic model is shown in Figure~\ref{fig:human-neand-h2}A.
+    }
+    \label{fig:deserts-directional-B}
+\end{figure}
+
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../figures/underdominance_F2.pdf}
+    \caption{
+        Underdominance, like negative selection, reduces expected $F_2$ compared
+        to neutral divergence.
+    }
+    \label{fig:underdominance-F2}
 \end{figure}
 
 \begin{figure}[ht!]
@@ -162,14 +235,28 @@
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/underdominance.Ne_10000.s_-0.001.pdf}
+    \includegraphics[width=0.6\textwidth]{../figures/underdominance.Ne_5000.s_-0.001.pdf}
     \caption{
         Comparison of predicted (\moments) and simulated SFS with underdominant
-        selection. In this comparison, $N_e=10^4$ and $s=-1\times10^{-3}$, so that
-        the population-size scale selection coefficient $\gamma=-20$.
+        selection. In this comparison, $N_e=5000$ and $s=-0.001$, so that
+        the population-size scale selection coefficient $\gamma=-10$.
         Simulations were performed under a Wright-Fisher model without linkage.
     }
     \label{fig:underdominance-validation-large-s}
 \end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../figures/underdominance.Ne_5000.s_0.0005.pdf}
+    \caption{
+        Comparison of predicted (\moments) and simulated SFS with \emph{over}dominant
+        selection. In this comparison, $N_e=5000$ and $s=0.0005$, so that
+        the population-size scale selection coefficient $\gamma=5$.
+        Thus, with positive selection, heterozygotes are favored.
+        Simulations were performed under a Wright-Fisher model without linkage.
+    }
+    \label{fig:overdominance-validation}
+\end{figure}
+
 
 \end{document}
