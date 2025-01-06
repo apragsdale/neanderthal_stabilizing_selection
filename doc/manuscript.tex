@@ -42,24 +42,26 @@
 \linenomathpatch{alignat}
 \linenomathpatch{flalign}
 
-%\linenumbers
+\linenumbers
 
 \title{Archaic introgression and the distribution
 of shared variation under stabilizing selection}
 \author[]{Aaron P. Ragsdale}
 \affil[]{apragsdale@wisc.edu}
-\affil[]{Department of Integrative Biology, University of Wisconsin--Madison, WI, USA}
+\affil[]{Department of Integrative Biology, University of Wisconsin--Madison, WI 53706}
 \date{\today}
 
 \begin{document}
 \maketitle
 
+\pagebreak
 
 \begin{abstract}
-    
+
+    \noindent
     Many phenotypic traits are under stabilizing selection, which maintains a
     population's mean phenotypic value near some optimum. The dynamics of
-    traits and trait architectures under stabilizing selection have bene
+    traits and trait architectures under stabilizing selection have been
     extensively studied for single populations at steady state. However,
     natural populations are seldom at steady state and are often structured in
     some way. Admixture and introgression events may be common, including over
@@ -82,6 +84,31 @@ of shared variation under stabilizing selection}
 
 \end{abstract}
 
+\begin{center}
+    \subsubsection*{Significance}
+\end{center}
+
+\small
+\begin{quote}
+
+    After admixture between two diverged populations, selection often removes
+    introgressed haplotypes. Selection against introgressed ancestry has
+    multiple proposed causes, including accumulated deleterious variation in
+    the source population, locally adapted variation being more fit, or genomic
+    incompatabilities. In this article, we find that normal selection on
+    complex traits, that is, stabilizing selection, causes selection against
+    introgressed ancestry. We develop theory that enables predictions for
+    patterns of introgressed ancestry under stabilizing selection on
+    phenotypes. Using this, we hypothesize that the distribution of
+    introgressed-ancestry deserts should be correlated between populations when
+    there is bi-directional gene flow, as inferred between Neanderthals and
+    humans.
+
+\end{quote}
+
+\normalsize
+
+\pagebreak
 \onehalfspacing
 
 \section*{Introduction}
@@ -106,7 +133,7 @@ against. Some introgressed haplotypes were likely positively selected in modern
 racimo2017signatures, enard2018evidence, gower2021detecting}, possibly due to
 locally adaptive variation that provided fitness advantages as humans
 encountered novel environments. Despite some cases of adaptive introgression,
-most introduced functional alleles likey were selected against in humans
+most introduced functional alleles likely were selected against in humans
 \citep{harris2016genetic, juric2016strength, veller2023recombination}. Since
 Neanderthal and Denisovan population sizes were relatively small for hundreds
 of thousands of years, theory predicts they would have accumulated deleterious
@@ -220,7 +247,9 @@ selection on shared trait optima may explain the overlap of
 introgressed-ancestry deserts in human and Neanderthal genomes after reciprocal
 introgression \citep{harris2023diverse}.
 
-\section*{Model and Methods}
+%\section*{Model and Methods}
+
+\subsection*{Model and Theory}
 
 We consider a polygenic trait for which an individual's additive genetic value
 is the sum over all effects of alleles in their genome. For individual $i$,
@@ -250,7 +279,7 @@ f(G | O, V_S) \mathcal{N}(O, V_G) dG =
 \left(\frac{V_S}{V_S+V_G}\right)^{1/2},\]
 so that as the genetic variance increases, mean fitness decreases.
 
-\subsection*{Mutation rates, effect sizes and genetic variance}
+\subsubsection*{Mutation rates, effect sizes and genetic variance}
 
 If all alleles contribute equally to the trait
 with effect sizes \(\pm a\) occurring in equal proportion,
@@ -278,7 +307,7 @@ house-of-Cards'' (SHC) approximation (Figure~\ref{fig:stab-sel}B), was given by
 \citet{burger1989much} and is discussed in detail in \citet[][Ch.
 28]{walsh2018evolution}.
 
-\subsection*{Approximating allelic dynamics via underdominance}
+\subsubsection*{Approximating allelic dynamics via underdominance}
 
 As initially shown by \citet{robertson1956effect} \citep[see
 also,][]{keightley1988quantitative, simons2018population}, when the mean
@@ -310,41 +339,6 @@ selection pushes allele frequencies to zero if $p<1/2$ and to one if $p>1/2$,
 resulting in symmetric underdominance. Details are shown in
 Appendix~\ref{sec:underdominance}.
 
-\subsubsection*{Computing expected genetic variance from the SFS}
-
-We model allelic dynamics using the diffusion approximation, where the expected
-change in mean allele frequency per generation is
-\[\E[M_{\delta_p}] = E[\Delta p] \approx s p(1-p),\]
-with $s$ defined above, and the expected change in variance of the allele frequency per
-generation is
-\[\E[V_{\delta_p}] \approx \frac{1}{2N_e}p(1-p).\]
-
-
-We extended the \moments-based solution for the sample site-frequency spectrum
-(SFS) \citep{jouganous2017inferring} to include underdominance with given
-selection coefficient $s$ (Appendix~\ref{sec:moments-underdominance}). The
-contribution of alleles with effect size $a$ to the total genetic variance
-$V_G$ is found by computing the expected pairwise diversity from the SFS (with
-sample size $n$, denoted $\Phi_n$), as
-\[V_{G,a} \approx 2a^2\sum_{j=1}^{n-1} \frac{j(n-j)}{n(n-1)} \Phi_n(j|a,\mu_a).\]
-Here, $\mu_a$ is the mutation rate of alleles with effect size $a$. Then
-assuming a normal distribution of effect sizes for new mutations, the total
-genetic variance is
-\[V_G \approx \int_{-\infty}^\infty V_{G,a} dF(a),\]
-where \(F(a)\) is the cumulative distribution function of \(\mathcal{N}(0,V_M)\).
-$V_G$ can be computed periodically in this way to predict trajectories in
-non-equilibrium settings (Figure~\ref{fig:one-pop}).
-
-If $V_G$ is non-negligible compared to $V_S$, ignoring $V_G$ and using
-$s=(p-1/2)a^2/V_S$ leads to deflated estimates of additive genetic variance
-(Figure~\ref{fig:supp-one-pop}). When mutation rates are large so that $V_G$ is
-not small compared to $V_S$, using $s=(p-1/2)a^2/(V_S+V_G)$ provides estimates
-of $V_G$ that closely match simulations assuming linkage equilibrium between
-loci (Figures~\ref{fig:toy-admixture} and
-\ref{fig:one-pop-0.01}--\ref{fig:one-pop-0.1}). Because $V_G$ can vary over
-time, this means that $s$ is no longer constant and can change due to factors
-such as non-constant demography that increase or reduce $V_G$.
-
 \begin{figure}[tb!]
     \centering
     \includegraphics{../figures/one_pop.pdf}
@@ -363,34 +357,6 @@ such as non-constant demography that increase or reduce $V_G$.
     }
     \label{fig:one-pop}
 \end{figure}
-
-\subsubsection*{Demographic history}
-
-Our numerical solution for the SFS allows for non-constant population size
-histories, population splits, continuous migration and admixture. Here, we
-consider relatively simple scenarios involving population splits with
-subsequent introgression events. We focus on parameter regimes relevant to
-human-Neanderthal history. In a simple toy model a population of size
-$N_e=10{,}000$ splits into two, one remaining size $10{,}000$ and the other
-shrinking to size $1{,}000$. They remain isolated for $2N_e$ generations (or
-500 thousand years, assuming an average generation time of 25 years) and then
-introgression occurs from one branch to the other, contributing $5\%$ ancestry
-to the recipient population (Figure~\ref{fig:toy-admixture}A,B).
-
-The second model is meant to more closely resemble inferred human-Neanderthal
-history, in which the ancestral population of size $N_e=10{,}000$ splits at 600
-kya into the human and Neanderthal branches, with effective sizes $10{,}000$
-and $2{,}000$, respectively. At 250 ka, an early human-to-Neanderthal
-introgression contributes $5\%$ ancestry to Neanderthals. The human branch
-shrinks to size $1{,}000$ 60 ka, followed by exponential growth to size
-$20,000$ at present time. Neanderthals contribute $2\%$ ancestry to this
-bottlenecked and expanding human population at 50 ka, after which they go
-extinct (Figure~\ref{fig:human-neand-h2}A).
-
-In each scenario, we tracked phenotypic variance and genetic variation to
-compare simulations to model predictions. The trait optimum was kept at $0$ in
-all populations (no optimum shift occurred), and the strength of selection
-$V_S=1$ remains constant.
 
 \begin{figure}[tb!]
     \centering
@@ -425,67 +391,6 @@ $V_S=1$ remains constant.
     }
     \label{fig:toy-admixture}
 \end{figure}
-
-\subsubsection*{Simulations with free recombination}
-
-We compared our \moments-based predictions for $V_G$ in non-equilibrium
-settings to simulations assuming linkage equilibrium as well as
-individual-based simulations with recombination (next section). For both,
-mutations occur at rate $\mu$ per haploid genome copy per generation, with
-effects drawn from a normal distribution with mean 0 and variance $V_M$.
-
-To simulate allele frequency changes under free recombination (assuming linkage
-equilibrium between all trait-affecting alleles at all times), for each focal
-segregating allele we integrated over possible genetic backgrounds contributed
-by all other segregating alleles. Making the assumption that many alleles
-contribute to the trait, the variance in genetic backgrounds is normally
-distributed around the mean genetic value $E_{\tilde{G}}=\sum_l 2p_l a_l$ with
-variance $V_{\tilde{G}}=\sum_l 2p_l(1-p_l)a_l^2$, where the sums omit the focal
-locus. The expected change in frequency was then computed using the approach
-outlined in Appendix~\ref{sec:underdominance} (without taking the first-order
-Taylor series approximation for the exponentials). Allele counts in the next
-generation were then binomially sampled with parameter $p+\E[\Delta p]$
-independently for each allele.
-
-\subsubsection*{Individual-based simulations with linkage}
-
-To include the effects of linkage between multiple selected alleles or selected
-and neutral alleles, we used \fwdpy \citep{thornton2019polygenic} to run
-Wright-Fisher simulations under the demographic models described above. In
-these simulations, we considered large (1 Morgan, or 100 Mb with a per-base
-recombination rate of $10^{-8}$) chromosomes with a uniform recombination
-landscape. Trait-affecting mutations were either uniformly distributed across
-the chromosome (Figures~\ref{fig:linkage} and
-\ref{fig:supp-low-VM}--\ref{fig:supp-high-VM}) or fell within functional
-regions (Figures~\ref{fig:deserts} and
-\ref{fig:deserts-high-VM}--\ref{fig:deserts-directional-B}). For the latter,
-such regions were centered 2 Mb apart and were 100kb in size, so that there
-were 50 evenly spaced regions across the chromosome. Mutation effect sizes were
-drawn either as constant values $\pm a$, or from a normal distribution with
-mutational variance $V_M$.
-
-In these simulations, we tracked the empirical phenotypic variance (since there
-is no simulated environmental effect, this is equivalent to $V_G$) in each
-population each generation. We measured the effects of linked selection on
-neutral introgressed ancestry using \tskit to analyze genealogical
-information \citep{ralph2020efficiently}. To measure the reduction in
-introgressed ancestry around introgressed variants (as shown in
-Figure~\ref{fig:linkage}), we identified each locus with a fixed difference
-between the parental populations at the time of admixture by preserving the
-generation immediately preceding admixture. For such a locus, for each sample
-we determined which (preserved) parental population its ancestry traced to at
-varying distances from the selected locus. Ancestry proportions were then
-averaged over each fixed difference. To measure proportions of introgressed
-ancestry or probabilities of observed ancestry deserts (as in
-Figure~\ref{fig:deserts}), we again used \tskit to average ancestry proportions
-of the source population in 50 kb windows. Ancestry deserts were defined as
-any such window with no ancestry inherited from the source population.
-
-\subsection*{Data and code availability}
-
-All code to run analyses, create figures, and compile this manuscript is
-available at
-\url{https://github.com/apragsdale/neanderthal_stabilizing_selection}.
 
 \section*{Results}
 
@@ -919,8 +824,136 @@ Neanderthals remain largely unknown, stabilizing selection provides a
 well-grounded explanation for observed patterns that should be considered when
 testing for epistasis, incompatibilities and adaptive introgression.
 
+\section*{Methods}
 
-\section*{Acknowledgements}
+\subsection*{Computing expected genetic variance from the SFS}
+
+We model allelic dynamics using the diffusion approximation, where the expected
+change in mean allele frequency per generation is
+\[\E[M_{\delta_p}] = E[\Delta p] \approx s p(1-p),\]
+with $s$ defined above, and the expected change in variance of the allele frequency per
+generation is
+\[\E[V_{\delta_p}] \approx \frac{1}{2N_e}p(1-p).\]
+
+
+We extended the \moments-based solution for the sample site-frequency spectrum
+(SFS) \citep{jouganous2017inferring} to include underdominance with given
+selection coefficient $s$ (Appendix~\ref{sec:moments-underdominance}). The
+contribution of alleles with effect size $a$ to the total genetic variance
+$V_G$ is found by computing the expected pairwise diversity from the SFS (with
+sample size $n$, denoted $\Phi_n$), as
+\[V_{G,a} \approx 2a^2\sum_{j=1}^{n-1} \frac{j(n-j)}{n(n-1)} \Phi_n(j|a,\mu_a).\]
+Here, $\mu_a$ is the mutation rate of alleles with effect size $a$. Then
+assuming a normal distribution of effect sizes for new mutations, the total
+genetic variance is
+\[V_G \approx \int_{-\infty}^\infty V_{G,a} dF(a),\]
+where \(F(a)\) is the cumulative distribution function of \(\mathcal{N}(0,V_M)\).
+$V_G$ can be computed periodically in this way to predict trajectories in
+non-equilibrium settings (Figure~\ref{fig:one-pop}).
+
+If $V_G$ is non-negligible compared to $V_S$, ignoring $V_G$ and using
+$s=(p-1/2)a^2/V_S$ leads to deflated estimates of additive genetic variance
+(Figure~\ref{fig:supp-one-pop}). When mutation rates are large so that $V_G$ is
+not small compared to $V_S$, using $s=(p-1/2)a^2/(V_S+V_G)$ provides estimates
+of $V_G$ that closely match simulations assuming linkage equilibrium between
+loci (Figures~\ref{fig:toy-admixture} and
+\ref{fig:one-pop-0.01}--\ref{fig:one-pop-0.1}). Because $V_G$ can vary over
+time, this means that $s$ is no longer constant and can change due to factors
+such as non-constant demography that increase or reduce $V_G$.
+
+\subsubsection*{Demographic history}
+
+Our numerical solution for the SFS allows for non-constant population size
+histories, population splits, continuous migration and admixture. Here, we
+consider relatively simple scenarios involving population splits with
+subsequent introgression events. We focus on parameter regimes relevant to
+human-Neanderthal history. In a simple toy model a population of size
+$N_e=10{,}000$ splits into two, one remaining size $10{,}000$ and the other
+shrinking to size $1{,}000$. They remain isolated for $2N_e$ generations (or
+500 thousand years, assuming an average generation time of 25 years) and then
+introgression occurs from one branch to the other, contributing $5\%$ ancestry
+to the recipient population (Figure~\ref{fig:toy-admixture}A,B).
+
+The second model is meant to more closely resemble inferred human-Neanderthal
+history, in which the ancestral population of size $N_e=10{,}000$ splits at 600
+kya into the human and Neanderthal branches, with effective sizes $10{,}000$
+and $2{,}000$, respectively. At 250 ka, an early human-to-Neanderthal
+introgression contributes $5\%$ ancestry to Neanderthals. The human branch
+shrinks to size $1{,}000$ 60 ka, followed by exponential growth to size
+$20,000$ at present time. Neanderthals contribute $2\%$ ancestry to this
+bottlenecked and expanding human population at 50 ka, after which they go
+extinct (Figure~\ref{fig:human-neand-h2}A).
+
+In each scenario, we tracked phenotypic variance and genetic variation to
+compare simulations to model predictions. The trait optimum was kept at $0$ in
+all populations (no optimum shift occurred), and the strength of selection
+$V_S=1$ remains constant.
+
+
+\subsubsection*{Simulations with free recombination}
+
+We compared our \moments-based predictions for $V_G$ in non-equilibrium
+settings to simulations assuming linkage equilibrium as well as
+individual-based simulations with recombination (next section). For both,
+mutations occur at rate $\mu$ per haploid genome copy per generation, with
+effects drawn from a normal distribution with mean 0 and variance $V_M$.
+
+To simulate allele frequency changes under free recombination (assuming linkage
+equilibrium between all trait-affecting alleles at all times), for each focal
+segregating allele we integrated over possible genetic backgrounds contributed
+by all other segregating alleles. Making the assumption that many alleles
+contribute to the trait, the variance in genetic backgrounds is normally
+distributed around the mean genetic value $E_{\tilde{G}}=\sum_l 2p_l a_l$ with
+variance $V_{\tilde{G}}=\sum_l 2p_l(1-p_l)a_l^2$, where the sums omit the focal
+locus. The expected change in frequency was then computed using the approach
+outlined in Appendix~\ref{sec:underdominance} (without taking the first-order
+Taylor series approximation for the exponentials). Allele counts in the next
+generation were then binomially sampled with parameter $p+\E[\Delta p]$
+independently for each allele.
+
+\subsubsection*{Individual-based simulations with linkage}
+
+To include the effects of linkage between multiple selected alleles or selected
+and neutral alleles, we used \fwdpy \citep{thornton2019polygenic} to run
+Wright-Fisher simulations under the demographic models described above. In
+these simulations, we considered large (1 Morgan, or 100 Mb with a per-base
+recombination rate of $10^{-8}$) chromosomes with a uniform recombination
+landscape. Trait-affecting mutations were either uniformly distributed across
+the chromosome (Figures~\ref{fig:linkage} and
+\ref{fig:supp-low-VM}--\ref{fig:supp-high-VM}) or fell within functional
+regions (Figures~\ref{fig:deserts} and
+\ref{fig:deserts-high-VM}--\ref{fig:deserts-directional-B}). For the latter,
+such regions were centered 2 Mb apart and were 100kb in size, so that there
+were 50 evenly spaced regions across the chromosome. Mutation effect sizes were
+drawn either as constant values $\pm a$, or from a normal distribution with
+mutational variance $V_M$.
+
+In these simulations, we tracked the empirical phenotypic variance (since there
+is no simulated environmental effect, this is equivalent to $V_G$) in each
+population each generation. We measured the effects of linked selection on
+neutral introgressed ancestry using \tskit to analyze genealogical
+information \citep{ralph2020efficiently}. To measure the reduction in
+introgressed ancestry around introgressed variants (as shown in
+Figure~\ref{fig:linkage}), we identified each locus with a fixed difference
+between the parental populations at the time of admixture by preserving the
+generation immediately preceding admixture. For such a locus, for each sample
+we determined which (preserved) parental population its ancestry traced to at
+varying distances from the selected locus. Ancestry proportions were then
+averaged over each fixed difference. To measure proportions of introgressed
+ancestry or probabilities of observed ancestry deserts (as in
+Figure~\ref{fig:deserts}), we again used \tskit to average ancestry proportions
+of the source population in 50 kb windows. Ancestry deserts were defined as
+any such window with no ancestry inherited from the source population.
+
+\subsection*{Data and code availability}
+
+All code to run analyses, create figures, and compile this manuscript is
+available at
+\url{https://github.com/apragsdale/neanderthal_stabilizing_selection}.
+
+
+
+\section*{Acknowledgments}
 
 I am grateful to Kevin Thornton, Bret Payseur, Carl Veller and Yuval Simons for
 valuable discussions, and Carl Veller for helpful comments on an earlier
