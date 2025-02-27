@@ -13,12 +13,16 @@
 \usepackage{xr}
 \externaldocument{manuscript}
 
-% local definitions
-\newcommand{\aprcomment}[1]{{\textcolor{blue}{Comment: #1}}}
+\usepackage{amsmath}
+\usepackage{amsfonts}
 
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\E}{\mathbb{E}}
 \usepackage{xspace}
 \newcommand{\moments}{\texttt{moments}\xspace}
 \newcommand{\fwdpy}{\texttt{fwdpy11}\xspace}
+\newcommand{\tskit}{\texttt{tskit}\xspace}
 
 \title{Supporting Information for\\
 ``Archaic introgression and the distribution
@@ -34,11 +38,186 @@ of shared variation under stabilizing selection''}
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
 
+\section{Stabilizing selection results in selection on trait-affecting alleles
+equivalent to symmetric underdominance} \label{sec:underdominance}
+
+This result is well known and has been derived many times before. We include it
+here for completeness. We consider a polygenic trait under stabilizing
+selection, and we assume the mean phenotype of the population is close to the
+optimal value (0), which will be the case if the optimum has not shifted
+recently. Because many segregating loci are assumed to contribute to the
+phenotypic variance of the trait, the phenotypic distribution is
+well-approximated as normally distributed around the optimum:
+\(f(G)=\frac{1}{\sqrt{2\pi V_G}} e^{-G^2/2V_G}\). We assume a Gaussian fitness
+function, so that the fitness of an individual with genotypic value $G$ is
+given by \(w(G)=e^{-G^2/2V_S}\).
+
+For a derived allele (labeled 1) with frequency $p$, the expected change in
+frequency over one generation due to selection (in general) is
+\[\E[\Delta p]=p(1-p)\frac{w_{1\cdot}-w_{0\cdot}}{\bar{w}},\]
+where \(\bar{w}\) is the mean fitness of the population, and marginal fitnesses
+for the derived and ancestral alleles are
+\[w_{1\cdot}=p w_{11} + (1-p)w_{01},\]
+and
+\[w_{0\cdot}=p w_{01} + (1-p)w_{00}.\]
+Here, $w_{11}$, $w_{01}$, and $w_{00}$ are the relative fitnesses of
+individuals who are homozygous for the derived allele, heterozygous, or
+homozygous for the ancestral allele, respectively.
+
+We partition an individual's genetic values into contributions from their
+genetic background ($\tilde{G}$) and the focal locus: $G=\tilde{G}+xa$, where
+$x\in{0,1,2}$.  We then integrate over genetic backgrounds to find the expected
+fitnesses of each genotype. As described in SI section 2.1 of
+\citet{simons2018population}, because each individual locus contributes a small
+amount to $V_G$, $V_{\tilde{G}}\approx V_G$ and the fitness function is well
+approximated as \(f(\tilde{G})=\frac{1}{\sqrt{2\pi
+V_G}}e^{-\tilde{G}^2/2V_G}\). Then, mean fitness
+\[
+    \bar{w} = \sqrt{\frac{V_S}{V_S+V_G}},
+\]
+as shown in the main text, and
+\[ 
+    w_{11} \approx \int_{-\infty}^\infty f(\tilde{G}) w(\tilde{G} + 2a) d\tilde{G}
+    = \bar{w}\exp{\left(\frac{-4a^2(1-p)^2}{2(V_S+V_G)}\right)},
+\]
+\[
+    w_{01} \approx \int_{-\infty}^\infty f(\tilde{G}) w(\tilde{G} + a) d\tilde{G}
+    = \bar{w}\exp{\left(\frac{-a^2(1-2p)^2}{2(V_S+V_G)}\right)},
+\]
+and
+\[
+    w_{00} \approx \int_{-\infty}^\infty f(\tilde{G}) w(\tilde{G}) d\tilde{G}
+    = \bar{w}\exp{\left(\frac{-4a^2p^2}{2(V_S+V_G)}\right)}.
+\]
+
+Taking the first-order Taylor series expansion of the exponentials
+($e^{-x}\approx1-x$, for small $x$) and combining terms,
+\[
+    \frac{w_{1\cdot} - w_{0\cdot}}{\bar{w}} \approx \frac{-a^2(1-2p)}{2(V_S+V_G)},
+\]
+demonstrating the result.
+
+This same result can be found by directly considering the marginal fitness of a
+focal allele against the expected haploid background, as pointed out by
+\citet{negm2024effect}. Thus, while the selection coefficient takes an
+equivalent form to underdominance, we note that the mechanism differs:
+selection acts against the minor allele, rather than against the heterozygous
+genotype.
+
+\section{Moment equations for over- and underdominance}
+\label{sec:moments-underdominance}
+
+For symmetric underdominance, the relative fitnesses of genotypes \(aa:Aa:AA\)
+are \(1:1-t:1\). We consider any value of $t$ (positive or negative,
+corresponding to either under- or overdominance); with stabilizing selection,
+\(t=\frac{a^2}{2V_S}\), so that heterozygous individuals always have reduced
+fitness compared to either homozygote.
+
+We extended \moments \citep{jouganous2017inferring} to compute the sample
+site-frequency spectrum \(\Phi_{\mathbf{n}}\) for one or more (up to five)
+populations with sample sizes \(\mathbf{n}\). This provides a good
+approximation for the distribution of trait-affecting allele frequencies across
+multiple populations if the trait optimum is shared across populations and each
+population's mean phenotype remains close to that optimum. This is expected to
+be the case if there are no optimum shifts in any lineage.  Hardy-Weinberg
+equilibrium is assumed at all loci. Accounting for optimum shifts in one or
+more lineages would require a combination of direct and underdominant selection
+\citep[e.g.,][]{hayward2022polygenic}, which we leave for future work.
+
+We refer readers to \citet{jouganous2017inferring} for a detailed introduction
+to the general moments-based framework for the dynamics of \(\Phi_\mathbf{n}\).
+Here, we describe how underdominant selection changes \(\Phi\) over a single
+generation. With symmetric underdominance, selection acts on heterozygotes. This
+can be formulated as some proportion of heterozygotes failing to reproduce in a
+given generation, with those selected lineages replaced by copies drawn from
+the full population.
+
+In a single population, we consider $n$ tracked lineages of which $i$ of those
+carry the derived allele (\(\Phi_n(i)\) is thus the count of loci with $i$
+observed derived alleles in a haploid sample of size of $n$). $i$ can increase
+or decrease due to selection ``events''. Here, we assume $t$ is small enough so
+that at most a single selection event occurs among the $n$ lineages in any
+given generation. This is a reasonable approximation as long as $t$ is not
+extremely large \citep{jouganous2017inferring, krukov2021taming} -- for
+selection coefficients induced by stabilizing selection, this is typically a
+safe assumption.
+
+Two selective events can change $i$ to $i+1$ or $i-1$: (a) a tracked copy
+carrying a derived allele is heterozygous (paired with an ancestral
+allele-carrying copy), selected against, and then replaced by an ancestral
+allele drawn from the rest of the population, so that \(i\rightarrow i-1\), or
+(b) a tracked copy carrying the ancestral allele is paired with a derived
+allele-carrying copy, selected against, and then replaced by a derived allele,
+so that \(i\rightarrow i+1\). In both cases, we require drawing two additional
+lineages to find the \(\Phi_n\) in the next generation, one for the diploid
+pair and one for the replacement allele (i.e., \(\Phi_n^{t+1}(i)\) requires
+\(\Phi_{n+2}^t\)). This results in an unclosed system of equations, and we use
+a quadratic jackknife approximation to approximate \(\Phi_{n+2}\) from
+\(\Phi_n\), as described in \citet{jouganous2017inferring}.
+
+The expected increase and decrease of $\Phi_n(i)$ due to selection is found by
+enumerating the sampling probabilities of each selective event. For case (a),
+\(i\rightarrow i-1\) (i.e., \(\Phi_n(i)\) is reduced) with probability
+\[t\frac{i(n-i+2)(n-i+1)}{(n+2)(n+1)}\Phi_{n+2}(i),\] and \(i+1\rightarrow i\)
+(\(\Phi_n(i)\) increases) with probability
+\[t\frac{(i+1)(n-i+1)(n-i)}{(n+2)(n+1)}\Phi_{n+2}(i+1).\] For case (b),
+\(i\rightarrow i+1\) with probability
+\[t\frac{(n-i)(i+2)(i+1)}{(n+2)(n+1)}\Phi_{n+2}(i+2),\] and \(i-1 \rightarrow
+i\) with probability \[t\frac{(n-i+1)(i+1)i}{(n+2)(n+1)}\Phi_{n+2}(i+1).\]
+These can be combined (with negative rates for the reduction of \(\Phi_n(i)\))
+to describe the change of \(\Phi_n(i)\) for all \(0\leq i \leq n\).
+Figures~\ref{fig:underdominance-validation-small-s}--\ref{fig:overdominance-validation}
+show that this approach, implemented in \moments, is accurate compared to
+discrete Wright-Fisher simulations.
+
+\section{Additive genetic variance after admixture}\label{sec:VG-admixture}
+
+Here, we derive the expected genetic variance after admixture between two
+source populations (Equation~\ref{eq:VG-admixture}). Suppose two population
+(labeled 0 and 1) diverged some time in the past and then admix in proportions
+$f$ and $1-f$.
+
+Assuming random mating, linkage equilibrium, and no dominance or epistasis
+(so \(V_G=V_A\)),
+\[V_G = \sum_l 2p_l(1-p_l)a_l^2 = \sum_l \pi_l a_l^2,\]
+where $\pi$ denotes expected pairwise diversity.
+At a given locus (dropping the $l$), after admixture the allele frequency is
+\[p=f p_0 + (1-f) p_1,\]
+so that
+\begin{align*}
+    2p(1-p) & = 2(f p_0 + (1-f) p_1)(1 - f p_0 - (1-f) p_1) \\
+    & = f^2 2p_0(1-p_0) + (1-f)^2 p_1(1-p_1) + 2f(1-f) (p_0(1-p_1) + p_1(1-p_0)) \\
+    & = f^2 \pi_{0,0} + (1-f)^2 \pi_{1,1} + 2f(1-f)\pi_{0,1}.
+\end{align*}
+Here, $\pi_{i,j}$ is the expected pairwise diversity between two samples, one
+drawn from population $i$ and the other from population $j$. If $i=j$, this is
+pairwise diversity within a single population.
+
+Plugging into the definition for $V_G$, we get after admixture
+\[V_G = f^2 V_{G,0} + (1-f)^2 V_{G,1} + 2f(1-f)\sum_l \pi_{0,1,l}a_l^2.\]
+We can write $\pi_{0,1}$ at a given locus in terms of $\pi_{0,0}$, $\pi_{1,1}$,
+and $F_2(0,1)=(p_0-p_1)^2$, a measure of single-locus allele frequency
+differentiation \citep{peter2016admixture}. Then
+\[\pi_{0,1} = F_2(0,1) + \frac{1}{2}\pi_{0,0} + \frac{1}{2}\pi_{1,1},\]
+and
+\begin{align*}
+    V_G & = f^2 V_{G,0} + (1-f)^2 V_{G,1} + 2f(1-f)\sum_l \left[F_{2,l}(0,1)
+    + \frac{1}{2}\pi_{0,0} + \frac{1}{2}\pi_{1,1}\right] a_l^2 \\
+    & = f^2 V_{G,0} + (1-f)^2 V_{G,1} + 2f(1-f)\left[\frac{1}{2}V_{G,0} 
+    + \frac{1}{2}V_{G,1} + \sum_l F_{2,l}(0,1)a_l^2\right] \\
+    %& = \left(f^2 + f(1-f)\right) V_{G,0} + \left((1-f)^2 + f(1-f)\right)V_{G,1}
+    %+ 2f(1-f) \sum_l F_{2,i}(0,1)a_l^2 \\
+    & = f V_{G,0} + (1-f)V_{G,1} + 2f(1-f)\sum_i F_{2,l}(0,1)a_l^2.
+\end{align*}
+
+\hfill$\square$
+
+
 \section{Supplemental Figures}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/one_pop_supp.pdf}
+    \includegraphics{one_pop_supp.pdf}
     \caption{
         Single-population dynamics when $V_G$ is not small.
         Solid lines: expected $V_G$ assuming $s=a^2/2V_S$. Dashed lines:
@@ -57,7 +236,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/one_pop.a_0.01.pdf}
+    \includegraphics{one_pop.a_0.01.pdf}
     \caption{
         Simulations with no linkage and weak effects.
         Total mutation rate was $\mu=0.025$ and all mutations had effect
@@ -72,7 +251,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/one_pop.a_0.04.pdf}
+    \includegraphics{one_pop.a_0.04.pdf}
     \caption{
         Simulations with no linkage and moderate effects.
         All parameters were consistent with Figure~\ref{fig:one-pop-0.01},
@@ -83,7 +262,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/one_pop.a_0.1.pdf}
+    \includegraphics{one_pop.a_0.1.pdf}
     \caption{
         Simulations with no linkage and strong effects.
         All parameters were consistent with Figure~\ref{fig:one-pop-0.01}, 
@@ -97,7 +276,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/model_comparison.SD_0.01.mu_0.001_0.025.pdf}
+    \includegraphics{model_comparison.SD_0.01.mu_0.001_0.025.pdf}
     \caption{
         With low mutational variance ($V_M=0.0001$), individual-based simulations
         using \fwdpy closely match our predictions using \moments, when the
@@ -112,7 +291,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering 
-    \includegraphics{../figures/model_comparison.SD_0.05.mu_0.001_0.025.pdf}
+    \includegraphics{model_comparison.SD_0.05.mu_0.001_0.025.pdf}
     \caption{
         With high mutational variance ($V_M=0.0025$), strong deviations are
         observed between individual-based simulations and expectations without
@@ -125,7 +304,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[t!]
     \centering
-    \includegraphics{../figures/human-neand-VG.pdf}
+    \includegraphics{human-neand-VG.pdf}
     \caption{
         Genetic variance of a trait under stabilizing selection in a model with
         human (blue) and Neanderthal (orange) demography. We consider two
@@ -140,7 +319,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/introgression_deserts.SD_0.05.pdf}
+    \includegraphics{introgression_deserts.SD_0.05.pdf}
     \caption{
         Introgressed ancestry and probability of introgression deserts in and
         around functional regions, from simulations with high mutational variance.
@@ -151,7 +330,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/introgression_deserts.SD_0.01.pdf}
+    \includegraphics{introgression_deserts.SD_0.01.pdf}
     \caption{
         Introgressed ancestry and probability of introgression deserts in and
         around functional regions, from simulations with moderate mutational variance.
@@ -162,7 +341,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/introgression_deserts.SD_0.005.pdf}
+    \includegraphics{introgression_deserts.SD_0.005.pdf}
     \caption{
         Introgressed ancestry and probability of introgression deserts in and
         around functional regions, from simulations with low mutational variance.
@@ -173,7 +352,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/introgression_deserts.directional.mean_-0.0002.shape_0.5.pdf}
+    \includegraphics{introgression_deserts.directional.mean_-0.0002.shape_0.5.pdf}
     \caption{
         Introgressed ancestry and probability of introgression deserts in and
         around functional regions, from simulations with directional selection.
@@ -186,7 +365,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/introgression_deserts.directional.mean_-0.001.shape_0.5.pdf}
+    \includegraphics{introgression_deserts.directional.mean_-0.001.shape_0.5.pdf}
     \caption{
         Introgressed ancestry and probability of introgression deserts in and
         around functional regions, from simulations with directional selection.
@@ -200,7 +379,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/underdominance_F2.pdf}
+    \includegraphics[width=0.6\textwidth]{underdominance_F2.pdf}
     \caption{
         Underdominance, like negative selection, reduces expected $F_2$ compared
         to neutral divergence.
@@ -210,7 +389,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics{../figures/supp-LD.pdf}
+    \includegraphics{supp-LD.pdf}
     \caption{
         Linkage disequilibrium between the a trait-affecting and neutral allele, 
         2000 generations after admixture. Inititally, the introgression proportion
@@ -223,7 +402,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/underdominance.Ne_10000.s_-5e-05.pdf}
+    \includegraphics[width=0.6\textwidth]{underdominance.Ne_10000.s_-5e-05.pdf}
     \caption{
         Comparison of predicted (\moments) and simulated SFS with underdominant
         selection. In this comparison, $N_e=10^4$ and $s=-5\times10^{-5}$, so that
@@ -235,7 +414,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/underdominance.Ne_5000.s_-0.001.pdf}
+    \includegraphics[width=0.6\textwidth]{underdominance.Ne_5000.s_-0.001.pdf}
     \caption{
         Comparison of predicted (\moments) and simulated SFS with underdominant
         selection. In this comparison, $N_e=5000$ and $s=-0.001$, so that
@@ -247,7 +426,7 @@ of shared variation under stabilizing selection''}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figures/underdominance.Ne_5000.s_0.0005.pdf}
+    \includegraphics[width=0.6\textwidth]{underdominance.Ne_5000.s_0.0005.pdf}
     \caption{
         Comparison of predicted (\moments) and simulated SFS with \emph{over}dominant
         selection. In this comparison, $N_e=5000$ and $s=0.0005$, so that

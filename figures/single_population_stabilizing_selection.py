@@ -116,15 +116,15 @@ def plot_stabilizing_selection_diagram(ax, VS=1, VG=0.1, optimum=0):
     ax.vlines(0, 0, 1, colors="k", linestyles="--", lw=1)
     ax.annotate(
         "",
-        xy=(0.43, 0.45),
+        xy=(0.4, 0.45),
         xytext=(0, 0.45),
-        arrowprops=dict(arrowstyle="->", lw=1),
+        arrowprops=dict(arrowstyle="|-|, widthA=0.2, widthB=0.2", lw=1),
     )
     ax.annotate(
         "",
-        xy=(1.21, 0.5),
+        xy=(1.18, 0.5),
         xytext=(0, 0.5),
-        arrowprops=dict(arrowstyle="->", lw=1),
+        arrowprops=dict(arrowstyle="|-|, widthA=0.2, widthB=0.2", lw=1),
     )
     ax.text(0.215, 0.40, "$V_G$", va="center", ha="center", color="k", fontsize=6)
     ax.text(0.605, 0.53, "$V_S$", va="center", ha="center", color="k", fontsize=6)
@@ -138,7 +138,7 @@ def plot_stabilizing_selection_diagram(ax, VS=1, VG=0.1, optimum=0):
         "",
         xy=(-0.6, 0.25),
         xytext=(-1.5, 0.25),
-        arrowprops=dict(arrowstyle="->", lw=1),
+        arrowprops=dict(arrowstyle="->", lw=1, ),
     )
     ax.annotate(
         "",
